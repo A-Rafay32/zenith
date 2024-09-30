@@ -57,16 +57,17 @@ class AppTextFieldDecorations {
         padding: EdgeInsets.symmetric(horizontal: 26.0),
         child: Icon(
           Icons.email_outlined,
-          color: AppColors.primaryColor,
+          color: AppColors.textWhiteColor,
         ),
       ),
       contentPadding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 23.h),
       labelText: "Email",
-      labelStyle: const TextStyle(color: AppColors.primaryColor),
+      labelStyle: const TextStyle(color: AppColors.textWhiteColor),
       floatingLabelBehavior: FloatingLabelBehavior.always,
       hintText: "Enter your email",
-      hintStyle: AppTextTheme.textTheme.labelMedium
-          ?.copyWith(color: Colors.black45, fontWeight: FontWeight.w900),
+      hintStyle: AppTextTheme.textTheme.labelMedium?.copyWith(
+          color: AppColors.textWhiteColor.withOpacity(0.6),
+          fontWeight: FontWeight.w900),
       focusedErrorBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.red.shade900),
           borderRadius: BorderRadius.circular(15),
@@ -76,11 +77,11 @@ class AppTextFieldDecorations {
           borderRadius: BorderRadius.circular(15),
           gapPadding: 10),
       focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: AppColors.primaryColor),
+          borderSide: const BorderSide(color: AppColors.textWhiteColor),
           borderRadius: BorderRadius.circular(15),
           gapPadding: 10),
       enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: AppColors.primaryColor),
+          borderSide: const BorderSide(color: AppColors.textWhiteColor),
           borderRadius: BorderRadius.circular(15),
           gapPadding: 10));
 
@@ -95,23 +96,24 @@ class AppTextFieldDecorations {
                     height: 30,
                     width: 30,
                     colorFilter: const ColorFilter.mode(
-                        AppColors.primaryColor, BlendMode.srcIn))
+                        AppColors.textWhiteColor, BlendMode.srcIn))
                 : SvgPicture.asset("assets/svg/eye_open.svg",
                     height: 30,
                     width: 30,
                     colorFilter: const ColorFilter.mode(
-                        AppColors.primaryColor, BlendMode.srcIn)),
+                        AppColors.textWhiteColor, BlendMode.srcIn)),
             iconSize: 28,
-            color: AppColors.primaryColor,
+            color: AppColors.textWhiteColor,
           ),
         ),
         contentPadding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 23.h),
         labelText: "Password",
-        labelStyle: const TextStyle(color: AppColors.primaryColor),
+        labelStyle: const TextStyle(color: AppColors.textWhiteColor),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         hintText: "Enter your password",
-        hintStyle: AppTextTheme.textTheme.labelMedium
-            ?.copyWith(color: Colors.black45, fontWeight: FontWeight.w900),
+        hintStyle: AppTextTheme.textTheme.labelMedium?.copyWith(
+            color: AppColors.textWhiteColor.withOpacity(0.6),
+            fontWeight: FontWeight.w900),
         focusedErrorBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.red.shade900),
             borderRadius: BorderRadius.circular(15),
@@ -121,11 +123,11 @@ class AppTextFieldDecorations {
             borderRadius: BorderRadius.circular(15),
             gapPadding: 10),
         focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: AppColors.primaryColor),
+            borderSide: const BorderSide(color: AppColors.textWhiteColor),
             borderRadius: BorderRadius.circular(15),
             gapPadding: 10),
         enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: AppColors.primaryColor),
+            borderSide: const BorderSide(color: AppColors.textWhiteColor),
             borderRadius: BorderRadius.circular(15),
             gapPadding: 10));
   }
@@ -139,25 +141,26 @@ class AppTextFieldDecorations {
         suffixIcon: suffixIcon,
         contentPadding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 23.h),
         labelText: label,
-        labelStyle: const TextStyle(color: AppColors.primaryColor),
+        labelStyle: const TextStyle(color: AppColors.textWhiteColor),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         hintText: hint ?? "Enter your ${label.toLowerCase()}",
-        hintStyle: AppTextTheme.textTheme.labelMedium
-            ?.copyWith(color: Colors.black45, fontWeight: FontWeight.w900),
+        hintStyle: AppTextTheme.textTheme.labelMedium?.copyWith(
+            color: AppColors.textWhiteColor.withOpacity(0.6),
+            fontWeight: FontWeight.w900),
         focusedErrorBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: AppColors.primaryColor),
+            borderSide: const BorderSide(color: AppColors.textWhiteColor),
             borderRadius: BorderRadius.circular(15),
             gapPadding: 10),
         errorBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: AppColors.primaryColor),
+            borderSide: const BorderSide(color: AppColors.textWhiteColor),
             borderRadius: BorderRadius.circular(15),
             gapPadding: 10),
         focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: AppColors.primaryColor),
+            borderSide: const BorderSide(color: AppColors.textWhiteColor),
             borderRadius: BorderRadius.circular(15),
             gapPadding: 10),
         enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: AppColors.primaryColor),
+            borderSide: const BorderSide(color: AppColors.textWhiteColor),
             borderRadius: BorderRadius.circular(15),
             gapPadding: 10));
   }

@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:zenith/app/themes/app_colors.dart';
 
 class CustomAppBar extends StatelessWidget {
   CustomAppBar(
       {super.key,
-      this.backgroundColor = Colors.white,
-      this.textColors = Colors.black,
+      this.backgroundColor = AppColors.backgroundColor,
+      this.textColors = AppColors.textWhiteColor,
       this.enableBackButton = true,
       required this.onPressed,
       required this.text});

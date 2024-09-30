@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:zenith/app/themes/app_paddings.dart';
 import 'package:zenith/core/extensions/routes_extenstion.dart';
 import 'package:zenith/core/extensions/sizes_extensions.dart';
+import 'package:zenith/core/extensions/text_theme_ext.dart';
 import 'package:zenith/features/auth/providers/auth_providers.dart';
 import 'package:zenith/features/auth/screens/register_screen.dart';
 import 'package:zenith/features/auth/screens/widgets/app_bar_white.dart';
@@ -64,7 +67,30 @@ class LoginScreen extends ConsumerWidget {
               ),
               AppSizes.largeY,
               AppSizes.largeY,
-              const SocialCard(),
+              GestureDetector(
+                onTap: () => ref.read(socialAuthNotifier.notifier).googleSignIn(
+                    email: emailController.text.trim(),
+                    password: passwordController.text.trim(),
+                    context: context),
+                child: Container(
+                  height: 60.h,
+                  width: context.w * 0.7,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(color: Colors.white54)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset("assets/svgs/google.svg",
+                          height: 30.h, width: 30.w),
+                      SizedBox(width: 20.w),
+                      Text("Sign in with Google",
+                          style: context.textTheme.labelLarge)
+                    ],
+                  ),
+                ),
+              ),
+              // const SocialCard(),
               const Spacer(),
               SignUpBar(
                 onTap: () => context.push(RegisterScreen()),

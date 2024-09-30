@@ -42,6 +42,7 @@ class AuthNotifier extends StateNotifier<AsyncValue> {
     required String password,
     required BuildContext context,
   }) async {
+    state = const AsyncValue.loading();
     final result = await authService.register(
         name: name, email: email, password: password);
     result.fold((left) {

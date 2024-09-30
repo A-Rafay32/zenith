@@ -3,7 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zenith/app/constants/firebase_constants.dart';
 import 'package:zenith/features/auth/model/user.dart';
+import 'package:zenith/features/auth/providers/social_auth_notifier.dart';
 import 'package:zenith/features/auth/repositories/auth_repository.dart';
+import 'package:zenith/features/auth/repositories/social_auth_repository.dart';
 import 'package:zenith/features/auth/repositories/user_repository.dart';
 import 'package:zenith/features/auth/providers/auth_notifier.dart';
 
@@ -11,9 +13,19 @@ final authRepositoryProvider = Provider((ref) {
   return AuthRepository();
 });
 
+final socialAuthRepositoryProvider = Provider((ref) {
+  return SocialAuthService();
+});
+
 final authNotifier = StateNotifierProvider<AuthNotifier, AsyncValue>((ref) {
   final authService = ref.watch(authRepositoryProvider);
   return AuthNotifier(authService: authService);
+});
+
+final socialAuthNotifier =
+    StateNotifierProvider<SocialAuthNotifier, AsyncValue>((ref) {
+  final service = ref.watch(socialAuthRepositoryProvider);
+  return SocialAuthNotifier(socialAuthService: service);
 });
 
 final authStreamProvider = StreamProvider.autoDispose((ref) {

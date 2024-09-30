@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "785019622876",
+    "project_id": "zenith-08",
+    "storage_bucket": "zenith-08.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:785019622876:android:ddd33de79cfd8aebbc6b19",
+        "android_client_info": {
+          "package_name": "com.example.zenith"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYl-radxtBQ5DZawOuQhyJsb6rOs1I8yU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

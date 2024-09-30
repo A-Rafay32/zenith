@@ -6,12 +6,11 @@ import 'package:zenith/core/exceptions/exceptions.dart';
 import 'package:zenith/core/utils/types.dart';
 
 class ImageService {
-  final storage = FirebaseStorage.instance;
+  final Reference storageRef = FirebaseStorage.instance.ref();
   final ImagePicker imgPicker = ImagePicker();
   List<XFile>? pickedFiles;
 
-  FutureEither1<List<dynamic>> uploadImages(
-      Reference storageRef, String path) async {
+  FutureEither1<List<dynamic>> uploadImages(String path) async {
     try {
       final urlList = [];
       final pickedFiles = await imgPicker.pickMultiImage();
@@ -51,10 +50,7 @@ class ImageService {
     }
   }
 
-  FutureEither1<String> pickImage(
-      {required Reference storageRef,
-      required String path,
-      required ImageSource source}) async {
+  FutureEither1<String> pickImage({required ImageSource source}) async {
     try {
       final pickedFile = await imgPicker.pickImage(source: source);
       if (pickedFile != null) {

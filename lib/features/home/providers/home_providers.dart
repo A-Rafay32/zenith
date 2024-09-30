@@ -1,23 +1,23 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:zenith/features/home/providers/rental_home_notifier.dart';
-import 'package:zenith/features/home/repositories/rental_home_repository.dart';
+// import 'package:flutter_riverpod/flutter_riverpod.dart';
+// import 'package:zenith/features/home/providers/rental_home_notifier.dart';
+// import 'package:zenith/features/home/repositories/rental_home_repository.dart';
 
-final rentalHomeNotifierProvider =
-    StateNotifierProvider<RentalHomeNotifier, AsyncValue>((ref) {
-  final repository = ref.read(rentalHomeRepository);
-  return RentalHomeNotifier(repository: repository);
-});
+// final rentalHomeNotifierProvider =
+//     StateNotifierProvider<RentalHomeNotifier, AsyncValue>((ref) {
+//   final repository = ref.read(rentalHomeRepository);
+//   return RentalHomeNotifier(repository: repository);
+// });
 
-final rentalHomeRepository = Provider((ref) {
-  return RentalHomeRepository();
-});
+// final rentalHomeRepository = Provider((ref) {
+//   return RentalHomeRepository();
+// });
 
-final rentalHomeStreamProvider = StreamProvider((ref) {
-  final repository = ref.read(rentalHomeRepository);
-  return repository.getAllHouses();
-});
+// final rentalHomeStreamProvider = StreamProvider((ref) {
+//   final repository = ref.read(rentalHomeRepository);
+//   return repository.getAllHouses();
+// });
 
-final availableRentalHomeStreamProvider = StreamProvider((ref) {
-  final repository = ref.read(rentalHomeRepository);
-  return repository.getAllAvailableRentalHouse();
-});
+// final availableRentalHomeStreamProvider = StreamProvider((ref) {
+//   final repository = ref.read(rentalHomeRepository);
+//   return repository.getAllAvailableRentalHouse();
+// });

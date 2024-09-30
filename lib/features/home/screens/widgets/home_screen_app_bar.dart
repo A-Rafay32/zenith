@@ -12,9 +12,10 @@ class HomeScreenAppBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    String? userName = FirebaseAuth.instance.currentUser?.displayName;
+    // String? userName = FirebaseAuth.instance.currentUser?.displayName;
 
     return AppBar(
+      backgroundColor: AppColors.backgroundColor,
       centerTitle: false,
       leading: const Padding(
         padding: EdgeInsets.only(left: 5, top: 5, bottom: 8),
@@ -27,17 +28,13 @@ class HomeScreenAppBar extends ConsumerWidget {
       title: Column(
         children: [
           Text(
-            "Hi, $userName",
-            style: Theme.of(context)
-                .textTheme
-                .titleLarge
-                ?.copyWith(color: Colors.white, fontSize: 20),
+            "Hi, userName",
+            style:
+                Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 20),
           ),
           Text(
             "London, UK",
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: Colors.white,
-                ),
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(),
           ),
         ],
       ),

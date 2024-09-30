@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:either_dart/either.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -33,6 +35,8 @@ class SocialAuthService extends AuthRepository {
         if (foundUser.isLeft) {
           final result = await UserRepository().createUser(
               user: UserModel(
+                  expeditionId:
+                      "${userCredential.user?.displayName}-${Random().nextInt(100)}",
                   id: userCredential.user?.uid ?? "",
                   userDetails: UserDetails(
                       name: userCredential.user?.displayName ?? "",

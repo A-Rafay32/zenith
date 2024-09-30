@@ -93,19 +93,19 @@ class UserRepository {
     }
   }
 
-  FutureEither1<List<RentalHouse>> getUserFavourites() async {
-    try {
-      final user = await getUserByEmail(currentUser?.email ?? "");
-      List<dynamic>? houseIds;
-      user.fold((left) {}, (right) {
-        houseIds = right.favourites;
-        print(houseIds);
-      });
-      return await RentalHomeRepository().getUserHouses(houseIds ?? []);
-    } on FirebaseException catch (e) {
-      return failure(e.message.toString());
-    }
-  }
+  // FutureEither1<List<RentalHouse>> getUserFavourites() async {
+  //   try {
+  //     final user = await getUserByEmail(currentUser?.email ?? "");
+  //     List<dynamic>? houseIds;
+  //     user.fold((left) {}, (right) {
+  //       houseIds = right.favourites;
+  //       print(houseIds);
+  //     });
+  //     return await RentalHomeRepository().getUserHouses(houseIds ?? []);
+  //   } on FirebaseException catch (e) {
+  //     return failure(e.message.toString());
+  //   }
+  // }
 
   FutureEither0 setUserProfileImage() async {
     try {

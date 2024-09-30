@@ -34,9 +34,9 @@ class _CatogoriesTabNavState extends ConsumerState<CatogoriesTabNav> {
           ),
           HomeTabNavigationItem(
               onTap: () {
-                ref
-                    .read(rentalHomeRepository)
-                    .getRentalHouse("S0CORtTumnE5Wt7NGKU1");
+                // ref
+                //     .read(rentalHomeRepository)
+                //     .getRentalHouse("S0CORtTumnE5Wt7NGKU1");
               },
               text: "House",
               isTagSelected: selectedTabIndex == 1 ? true : false,

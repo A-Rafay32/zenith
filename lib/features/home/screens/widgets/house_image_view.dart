@@ -64,11 +64,11 @@ class HouseImageView extends StatelessWidget {
         //             color: AppColors.backgroundColor, fontSize: 15.sp),
         //       )),
         // ),
-        const Positioned(
-            left: 0,
-            child: FavIcon(
-              houseId: "",
-            ))
+        // const Positioned(
+        //     left: 0,
+        //     child: FavIcon(
+        //       houseId: "",
+        //     ))
       ],
     );
   }

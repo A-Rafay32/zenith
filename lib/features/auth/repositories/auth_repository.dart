@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:zenith/core/utils/types.dart';
@@ -51,6 +53,7 @@ class AuthRepository {
           email: email, password: password);
       final result = await UserRepository().createUser(
           user: UserModel(
+              expeditionId: "$name-${Random().nextInt(100)}",
               id: currentUser?.uid ?? "",
               userDetails: UserDetails(
                 name: name,

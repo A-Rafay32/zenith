@@ -37,7 +37,7 @@ class _HousesCardWidgetState extends State<HousesCardWidget> {
           padding: AppPaddings.tiny,
           decoration: BoxDecoration(
             boxShadow: AppStyles.boxShadow,
-            color: Colors.white,
+            color: AppColors.primaryColor,
             borderRadius: BorderRadius.circular(20),
           ),
           child: Column(

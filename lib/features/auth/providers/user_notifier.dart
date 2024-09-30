@@ -19,11 +19,11 @@ class UserNotifier extends StateNotifier<AsyncValue> {
         .whenComplete(() => const AsyncValue.data(null));
   }
 
-  FutureEither0 addToFavourites(String houseId) async {
-    return await userService
-        .addToFavourites(houseId)
-        .whenComplete(() => getFavourites());
-  }
+  // FutureEither0 addToFavourites(String houseId) async {
+  //   return await userService
+  //       .addToFavourites(houseId)
+  //       .whenComplete(() => getFavourites());
+  // }
 
   // FutureEither1<List<RentalHouse>> getFavourites() async {
   //   state = const AsyncValue.loading();
@@ -36,6 +36,6 @@ final userNotifier = StateNotifierProvider<UserNotifier, AsyncValue>((ref) {
   return UserNotifier(userService: userService);
 });
 
-final favouritesProvider = FutureProvider((ref) async {
-  return ref.watch(userNotifier.notifier).getFavourites();
-});
+// final favouritesProvider = FutureProvider((ref) async {
+//   return ref.watch(userNotifier.notifier).getFavourites();
+// });

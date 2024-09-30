@@ -4,12 +4,12 @@ import 'package:zenith/app/themes/text_theme.dart';
 
 class AppThemes {
   late final theme = ThemeData(
-      primaryColor: Colors.black,
+      primaryColor: AppColors.primaryColor,
       colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
       textTheme: AppTextTheme.textTheme,
       elevatedButtonTheme: elevationButtonTheme,
       textButtonTheme: textButtonTheme,
-      cardColor: AppColors.backgroundColor,
+      cardColor: AppColors.secondaryColor,
       appBarTheme: appBarTheme,
       visualDensity: VisualDensity.adaptivePlatformDensity,
       searchBarTheme: searchBarThemeData,

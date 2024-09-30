@@ -4,14 +4,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:zenith/app/constants/firebase_constants.dart';
+import 'package:zenith/app/themes/app_colors.dart';
 import 'package:zenith/app/themes/app_paddings.dart';
 import 'package:zenith/core/extensions/routes_extenstion.dart';
 import 'package:zenith/core/extensions/sizes_extensions.dart';
 import 'package:zenith/features/auth/providers/auth_providers.dart';
 import 'package:zenith/features/auth/repositories/user_repository.dart';
-import 'package:zenith/features/auth/screens/widgets/button.dart';
-import 'package:zenith/features/seller/screen/seller_dashboard_screen.dart';
-import 'package:zenith/features/seller/screen/seller_form_screen.dart';
+// import 'package:zenith/features/seller/screen/seller_dashboard_screen.dart';
+// import 'package:zenith/features/seller/screen/seller_form_screen.dart';
 
 class ProfileOptionsList extends ConsumerStatefulWidget {
   const ProfileOptionsList({
@@ -26,9 +26,9 @@ class _ProfileOptionsListState extends ConsumerState<ProfileOptionsList> {
   bool isSeller = false;
   @override
   void initState() {
-    ref
-        .read(currentUserDocProvider)
-        .fold((left) => null, (right) => isSeller = right.isSeller);
+    // ref
+    //     .read(currentUserDocProvider)
+    //     .fold((left) => null, (right) => isSeller = right.isSeller);
     super.initState();
   }
 
@@ -72,7 +72,7 @@ class _ProfileOptionsListState extends ConsumerState<ProfileOptionsList> {
                   TextButton(
                       onPressed: () {
                         context.pop();
-                        context.push(const SellerStoreScreen());
+                        // context.push(const SellerStoreScreen());
                       },
                       child: const Text("Continue")),
                 ],
@@ -101,9 +101,6 @@ class _ProfileOptionsListState extends ConsumerState<ProfileOptionsList> {
             text: "Switch to Seller",
             w: context.w,
           ),
-        const Divider(
-          color: Color.fromARGB(255, 238, 238, 238),
-        ),
         const Divider(
           color: Color.fromARGB(255, 238, 238, 238),
         ),
@@ -202,28 +199,28 @@ class ProfileOptionsCard extends StatelessWidget {
         child: Row(
           children: [
             SvgPicture.asset(
-              icon, // Replace with your SVG asset path
-              width: svgW ?? 25.w, // Adjust the width as needed
-              height: svgH ?? 25.h, // Adjust the height as needed
-
+              icon,
+              width: svgW ?? 25.w,
+              height: svgH ?? 25.h,
               colorFilter: ColorFilter.mode(
-                  text == "Logout" ? Colors.red : Colors.black,
+                  text == "Logout" ? Colors.red : AppColors.textWhiteColor,
                   BlendMode.srcIn),
             ),
             const SizedBox(width: 10),
             Text(
               text,
               style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: text == "Logout" ? Colors.red : Colors.black,
+                    color: text == "Logout"
+                        ? Colors.red
+                        : AppColors.textWhiteColor,
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w600,
                   ),
             ),
             const Spacer(),
             Icon(
-              Icons.arrow_forward_ios_rounded, // Replace with your desired icon
-              size: 24.h, // Adjust the size as needed
-              color: Colors.black, // Adjust the color as needed
+              Icons.arrow_forward_ios_rounded,
+              size: 24.h,
             ),
           ],
         ),

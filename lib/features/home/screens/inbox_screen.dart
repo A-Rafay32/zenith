@@ -11,9 +11,9 @@ import 'package:zenith/core/extensions/sizes_extensions.dart';
 import 'package:zenith/core/utils/loader.dart';
 import 'package:zenith/features/home/screens/widgets/inbox_card.dart';
 import 'package:zenith/features/home/screens/widgets/inbox_tap_bar.dart';
-import 'package:zenith/features/offer/model/offer.dart';
-import 'package:zenith/features/offer/providers/offer_provider.dart';
-import 'package:zenith/features/offer/screens/offer_detailed_screen.dart';
+// import 'package:zenith/features/offer/model/offer.dart';
+// import 'package:zenith/features/offer/providers/offer_provider.dart';
+// import 'package:zenith/features/offer/screens/offer_detailed_screen.dart';
 
 class InboxScreen extends ConsumerStatefulWidget {
   const InboxScreen({super.key});
@@ -28,99 +28,100 @@ class _InboxScreenState extends ConsumerState<InboxScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final offersByUserStream = ref.watch(offersByUserProvider);
-    final offersForUserStream = ref.watch(offersForUserProvider);
-    AsyncValue<List<Offer>> selectedStream = offersByUserStream;
+    // final offersByUserStream = ref.watch(offersByUserProvider);
+    // final offersForUserStream = ref.watch(offersForUserProvider);
+    // AsyncValue<List<Offer>> selectedStream = offersByUserStream;
 
-    return Container(
-        height: context.h,
-        width: context.w,
-        padding: AppPaddings.small,
-        color: AppColors.backgroundColor,
-        child: SingleChildScrollView(
-            child: Column(children: [
-          SizedBox(
-            height: 50,
-            child: TextField(
-              cursorHeight: 25,
-              controller: TextEditingController(),
-              decoration: AppTextFieldDecorations.searchFieldDecoration,
-            ),
-          ),
-          Container(
-              margin: const EdgeInsets.symmetric(vertical: 8),
-              height: 40,
-              width: context.w,
-              child: Row(
-                  children: List.generate(
-                      tabs.length,
-                      (index) => HomeTabNavigationItem(
-                          isTagSelected:
-                              selectedTabIndex == index ? true : false,
-                          onTap: () {
-                            selectedTabIndex = index;
-                            setState(() {});
-                          },
-                          text: tabs[index])))),
-          if (selectedTabIndex == 0)
-            offersByUserStream.when(
-              data: (data) => data.isEmpty
-                  ? const EmptyInboxBody()
-                  : SizedBox(
-                      height: context.h * 0.6,
-                      width: context.w,
-                      child: ListView.builder(
-                        physics: const ClampingScrollPhysics(),
-                        itemCount: data.length,
-                        itemBuilder: (context, index) => InboxCard(
-                          offerStatus: data[index].offerStatus,
-                          inboxType: InboxType.Unread,
-                          from: data[index].title,
-                          message: data[index].statement ?? "",
-                          date: data[index].createdAt.toString(),
-                          onTap: () {
-                            context.push(OfferDetailedScreen(
-                                offerId: data[index].id ?? ""));
-                          },
-                        ),
-                      ),
-                    ),
-              error: (error, stackTrace) {
-                print("error : ${error.toString()} stackTrace: $stackTrace");
-                return Text("error : ${error.toString()} ");
-              },
-              loading: () => const Loader(),
-            )
-          else
-            offersForUserStream.when(
-              data: (data) => data.isEmpty
-                  ? const EmptyInboxBody()
-                  : SizedBox(
-                      height: context.h * 0.6,
-                      width: context.w,
-                      child: ListView.builder(
-                        physics: const ClampingScrollPhysics(),
-                        itemCount: data.length,
-                        itemBuilder: (context, index) => InboxCard(
-                          offerStatus: data[index].offerStatus,
-                          inboxType: InboxType.Unread,
-                          from: data[index].title,
-                          message: data[index].statement ?? "",
-                          date: data[index].createdAt.toString(),
-                          onTap: () {
-                            context.push(OfferDetailedScreen(
-                                offerId: data[index].id ?? ""));
-                          },
-                        ),
-                      ),
-                    ),
-              error: (error, stackTrace) {
-                print("error : ${error.toString()} stackTrace: $stackTrace");
-                return Text("error : ${error.toString()} ");
-              },
-              loading: () => const Loader(),
-            )
-        ])));
+    return Container();
+    // return Container(
+    //     height: context.h,
+    //     width: context.w,
+    //     padding: AppPaddings.small,
+    //     color: AppColors.backgroundColor,
+    //     child: SingleChildScrollView(
+    //         child: Column(children: [
+    //       SizedBox(
+    //         height: 50,
+    //         child: TextField(
+    //           cursorHeight: 25,
+    //           controller: TextEditingController(),
+    //           decoration: AppTextFieldDecorations.searchFieldDecoration,
+    //         ),
+    //       ),
+    //       Container(
+    //           margin: const EdgeInsets.symmetric(vertical: 8),
+    //           height: 40,
+    //           width: context.w,
+    //           child: Row(
+    //               children: List.generate(
+    //                   tabs.length,
+    //                   (index) => HomeTabNavigationItem(
+    //                       isTagSelected:
+    //                           selectedTabIndex == index ? true : false,
+    //                       onTap: () {
+    //                         selectedTabIndex = index;
+    //                         setState(() {});
+    //                       },
+    //                       text: tabs[index])))),
+    //       if (selectedTabIndex == 0)
+    //         offersByUserStream.when(
+    //           data: (data) => data.isEmpty
+    //               ? const EmptyInboxBody()
+    //               : SizedBox(
+    //                   height: context.h * 0.6,
+    //                   width: context.w,
+    //                   child: ListView.builder(
+    //                     physics: const ClampingScrollPhysics(),
+    //                     itemCount: data.length,
+    //                     itemBuilder: (context, index) => InboxCard(
+    //                       offerStatus: data[index].offerStatus,
+    //                       inboxType: InboxType.Unread,
+    //                       from: data[index].title,
+    //                       message: data[index].statement ?? "",
+    //                       date: data[index].createdAt.toString(),
+    //                       onTap: () {
+    //                         context.push(OfferDetailedScreen(
+    //                             offerId: data[index].id ?? ""));
+    //                       },
+    //                     ),
+    //                   ),
+    //                 ),
+    //           error: (error, stackTrace) {
+    //             print("error : ${error.toString()} stackTrace: $stackTrace");
+    //             return Text("error : ${error.toString()} ");
+    //           },
+    //           loading: () => const Loader(),
+    //         )
+    //       else
+    //         offersForUserStream.when(
+    //           data: (data) => data.isEmpty
+    //               ? const EmptyInboxBody()
+    //               : SizedBox(
+    //                   height: context.h * 0.6,
+    //                   width: context.w,
+    //                   child: ListView.builder(
+    //                     physics: const ClampingScrollPhysics(),
+    //                     itemCount: data.length,
+    //                     itemBuilder: (context, index) => InboxCard(
+    //                       offerStatus: data[index].offerStatus,
+    //                       inboxType: InboxType.Unread,
+    //                       from: data[index].title,
+    //                       message: data[index].statement ?? "",
+    //                       date: data[index].createdAt.toString(),
+    //                       onTap: () {
+    //                         context.push(OfferDetailedScreen(
+    //                             offerId: data[index].id ?? ""));
+    //                       },
+    //                     ),
+    //                   ),
+    //                 ),
+    //           error: (error, stackTrace) {
+    //             print("error : ${error.toString()} stackTrace: $stackTrace");
+    //             return Text("error : ${error.toString()} ");
+    //           },
+    //           loading: () => const Loader(),
+    //         )
+    //     ])));
   }
 }
 
