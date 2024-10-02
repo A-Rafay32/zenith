@@ -40,7 +40,7 @@ class ExploreScreen extends StatelessWidget {
                     ClipRRect(
                         borderRadius: BorderRadius.circular(15),
                         child: Image.asset(
-                          AppImages.houseImages[index],
+                          AppImages.spaceImages[index],
                           fit: BoxFit.cover,
                           height: 90.h,
                         )),

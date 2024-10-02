@@ -1,13 +1,9 @@
 class AppImages {
   static const splashImage = "assets/images/splash4.jpg";
-  static List<String> houseImages = [
-    "assets/house/index.jpeg",
-    "assets/house/index1.jpeg",
-    "assets/house/index2.jpeg",
-    "assets/house/index3.jpeg",
-    "assets/house/index4.jpeg",
-    "assets/house/index5.jpeg",
-  ];
+  static const defaultImage = "assets/space/asset1.jpg";
+  static List<String> spaceImages = [
+    "assets/space/asset1.jpg",
+  ];  
 }
 
 class AppSvgs {

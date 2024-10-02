@@ -23,10 +23,11 @@ class ExpeditionDetailRepository {
     try {
       if (adminId != null) {
         await detailsRef(expeditionId)
-            .add(expeditionDetail.toMap())
+            .doc(expeditionDetail.id)
+            .set(expeditionDetail.toMap())
             .catchError((error) => throw error.toString());
 
-        return Right(Success(message: "Expedition added successfully"));
+        return Right(Success(message: "Expedition Details added successfully"));
       } else {
         return Left(Failure(message: "Owner Id is empty "));
       }
@@ -42,7 +43,7 @@ class ExpeditionDetailRepository {
       String expeditionId, String expeditionDetailId) async {
     try {
       await detailsRef(expeditionId).doc(expeditionDetailId).delete();
-      return Right(Success(message: "Expedition deleted successfully"));
+      return Right(Success(message: "Expedition Details deleted successfully"));
     } on FirebaseException catch (e) {
       throw e.message.toString();
     } catch (e) {
@@ -56,13 +57,13 @@ class ExpeditionDetailRepository {
       DocumentSnapshot docSnapshot =
           await detailsRef(expeditionId).doc(expeditionDetailId).get();
       if (docSnapshot.exists) {
-        Expedition expeditionDetail =
-            Expedition.fromMap(docSnapshot.data() as Map<String, dynamic>);
+        ExpeditionDetail expeditionDetail = ExpeditionDetail.fromMap(
+            docSnapshot.data() as Map<String, dynamic>);
         print(expeditionDetail.toMap());
         return Right(ExpeditionDetail.fromMap(
             docSnapshot.data() as Map<String, dynamic>));
       } else {
-        return Left(Failure(message: "Expedition Doesnot exist"));
+        return Left(Failure(message: "Expedition Details Doesnot exist"));
       }
     } on FirebaseException catch (e) {
       throw e.message.toString();
@@ -72,17 +73,15 @@ class ExpeditionDetailRepository {
     }
   }
 
-  FutureEither0 updateExpeditionDetailById(
-    String expeditionId,
-      String expeditionDetailId, Map<String, dynamic> updatefields
-      ) async {
+  FutureEither0 updateExpeditionDetailById(String expeditionId,
+      String expeditionDetailId, Map<String, dynamic> updatefields) async {
     try {
       await detailsRef(expeditionId)
           .doc(expeditionId)
           .update(updatefields)
           .catchError((error) => throw error.toString());
 
-      return Right(Success(message: "Expedition updated successfully"));
+      return Right(Success(message: "Expedition Details updated successfully"));
     } on FirebaseException catch (e) {
       throw e.message.toString();
     } catch (e) {

@@ -4,15 +4,15 @@ class ExpeditionDetail {
   final String id;
   final String text;
   final String description;
-  final String image;
-  final Map<String, dynamic> extras;
+  final String? image;
+  final Map<String, dynamic>? extras;
 
   ExpeditionDetail({
     required this.id,
     required this.text,
     required this.description,
-    required this.image,
-    required this.extras,
+    this.image,
+    this.extras,
   });
 
   Map<String, dynamic> toMap() {
@@ -30,8 +30,8 @@ class ExpeditionDetail {
       id: map['id'] ?? '',
       text: map['text'] ?? '',
       description: map['description'] ?? '',
-      image: map['image'] ?? '',
-      extras: Map<String, dynamic>.from(map['extras']),
+      image: map['image'],
+      extras: Map<String, dynamic>.from(map['extras'] ?? {}),
     );
   }
 

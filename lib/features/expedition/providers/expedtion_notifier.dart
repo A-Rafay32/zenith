@@ -65,6 +65,6 @@ class ExpeditionNotifier extends StateNotifier<AsyncValue> {
 
 final expeditionNotifier =
     StateNotifierProvider<ExpeditionNotifier, AsyncValue>((ref) {
-  final provider = ref.watch(expeditionProvider);
+  final provider = ref.watch(expeditionRepositoryProvider);
   return ExpeditionNotifier(expeditionRepository: provider);
 });

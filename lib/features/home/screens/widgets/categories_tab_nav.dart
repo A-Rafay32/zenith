@@ -29,7 +29,7 @@ class _CatogoriesTabNavState extends ConsumerState<CatogoriesTabNav> {
           HomeTabNavigationItem(
             isTagSelected: selectedTabIndex == 0 ? true : false,
             onTap: () {},
-            imageAsset: AppImages.houseImages[0],
+            imageAsset: AppImages.spaceImages[0],
             text: "All",
           ),
           HomeTabNavigationItem(
@@ -40,12 +40,12 @@ class _CatogoriesTabNavState extends ConsumerState<CatogoriesTabNav> {
               },
               text: "House",
               isTagSelected: selectedTabIndex == 1 ? true : false,
-              imageAsset: AppImages.houseImages[1]),
+              imageAsset: AppImages.spaceImages[1]),
           HomeTabNavigationItem(
               onTap: () {},
               text: "Apartment",
               isTagSelected: selectedTabIndex == 2 ? true : false,
-              imageAsset: AppImages.houseImages[2]),
+              imageAsset: AppImages.spaceImages[2]),
         ],
       ),
     );

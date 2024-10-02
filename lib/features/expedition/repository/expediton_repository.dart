@@ -15,7 +15,8 @@ class ExpeditionRepository {
     try {
       if (adminId != null) {
         await expeditionCollection
-            .add(expedition.toMap())
+            .doc(expedition.id)
+            .set(expedition.toMap())
             .catchError((error) => throw error.toString());
 
         return Right(Success(message: "Expedition added successfully"));
@@ -116,6 +117,10 @@ class ExpeditionRepository {
 
   Stream<List<Expedition>> getAllExpeditions() {
     try {
+      (expeditionCollection.snapshots().map((querySnapshot) => querySnapshot
+          .docs
+          .map((documentSnapshot) => print(documentSnapshot.data()))
+          .toList()));
       return expeditionCollection.snapshots().map((querySnapshot) =>
           querySnapshot.docs
               .map((documentSnapshot) =>
