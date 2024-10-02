@@ -16,6 +16,7 @@ import 'package:zenith/features/expedition/model/expedition.dart';
 import 'package:zenith/features/expedition/model/expedtion_detail.dart';
 import 'package:zenith/features/expedition/providers/expedition_detail_notifier.dart';
 import 'package:zenith/features/expedition/providers/expedtion_notifier.dart';
+import 'package:zenith/features/quiz/model/quiz.dart';
 
 enum addHouseEnum { Rental, Seller }
 
@@ -119,6 +120,14 @@ class _AddRentalHomeScreenState extends ConsumerState<AddExpeditionScreen> {
             ),
           )),
     );
+  }
+
+  void addQuizScreen(WidgetRef ref, BuildContext context) async {
+    // Quiz(
+    //     id: id,
+    //     expeditionId: expeditionId,
+    //     correctAnswers: correctAnswers,
+    //     passingCriteria: passingCriteria);
   }
 
   void addExpedition(WidgetRef ref, BuildContext context) async {

@@ -15,7 +15,8 @@ final expeditionStreamProvider = StreamProvider((ref) {
   return repository.getAllExpeditions();
 });
 
-final expeditionDetailStreamProvider = StreamProvider.family((ref, String expeditionId) {
+final expeditionDetailStreamProvider =
+    StreamProvider.family((ref, String expeditionId) {
   final repository = ref.watch(expeditionDetailRepositoryProvider);
   return repository.getAllExpeditionDetails(expeditionId);
 });
