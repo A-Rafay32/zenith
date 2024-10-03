@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:zenith/features/user_quiz.dart/model/user_answer.dart';
 
 class QuizSession {
@@ -8,8 +7,9 @@ class QuizSession {
   final String userId;
   final List<UserAnswer> userAnswers;
   final int currentScore;
-  final int currentQuestionIndex;
+  final int? currentQuestionIndex;
   final int attemptCount;
+  final DateTime startTime;
 
   QuizSession({
     required this.id,
@@ -17,8 +17,9 @@ class QuizSession {
     required this.userId,
     required this.userAnswers,
     required this.currentScore,
-    required this.currentQuestionIndex,
+    this.currentQuestionIndex = 0,
     required this.attemptCount,
+    required this.startTime,
   });
 
   Map<String, dynamic> toMap() {
@@ -30,6 +31,7 @@ class QuizSession {
       'currentScore': currentScore,
       'currentQuestionIndex': currentQuestionIndex,
       'attemptCount': attemptCount,
+      'startTime': startTime.millisecondsSinceEpoch,
     };
   }
 
@@ -43,6 +45,7 @@ class QuizSession {
       currentScore: map['currentScore']?.toInt() ?? 0,
       currentQuestionIndex: map['currentQuestionIndex']?.toInt() ?? 0,
       attemptCount: map['attemptCount']?.toInt() ?? 0,
+      startTime: DateTime.fromMillisecondsSinceEpoch(map['startTime']),
     );
   }
 

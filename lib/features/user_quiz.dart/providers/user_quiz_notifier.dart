@@ -10,63 +10,67 @@ import 'package:zenith/features/expedition/repository/expediton_repository.dart'
 import 'package:zenith/features/quiz/model/quiz.dart';
 import 'package:zenith/features/quiz/providers/quiz_providers.dart';
 import 'package:zenith/features/quiz/repository/quiz_repository.dart';
+import 'package:zenith/features/user_quiz.dart/model/user_quiz.dart';
+import 'package:zenith/features/user_quiz.dart/providers/user_quiz_provider.dart';
+import 'package:zenith/features/user_quiz.dart/repository/user_quiz_repository.dart';
 
-class QuizNotifier extends StateNotifier<AsyncValue> {
-  QuizNotifier({required this.quizRepository})
+class UserQuizNotifier extends StateNotifier<AsyncValue> {
+  UserQuizNotifier({required this.userQuizRepository})
       : super(const AsyncValue.data(null));
 
-  final QuizRepository quizRepository;
+  final UserQuizRepository userQuizRepository;
 
   void addQuiz(
-      {required Quiz quiz,
+      {required UserQuiz userQuiz,
       required String? adminId,
       required BuildContext context}) async {
     state = const AsyncValue.loading();
-    final result = await quizRepository
-        .addQuiz(quiz: quiz, adminId: adminId)
+    final result = await userQuizRepository
+        .addUserQuiz(userQuiz: userQuiz, adminId: adminId)
         .whenComplete(() => const AsyncValue.data(null));
     result.fold((left) => context.showSnackBar(left.message),
         (right) => context.showSnackBar(right.message));
   }
 
-  void updateQuizById(
+  void updateExpeditionById(
       {required String quizId,
       required Map<String, dynamic> updatefields,
       required BuildContext context}) async {
     state = const AsyncValue.loading();
-    final result = await quizRepository
-        .updateQuizId(quizId, updatefields)
+    final result = await userQuizRepository
+        .updateUserQuizId(quizId, updatefields)
         .whenComplete(() => const AsyncValue.data(null));
     result.fold((left) => context.showSnackBar(left.message),
         (right) => context.showSnackBar(right.message));
   }
 
-  void deleteQuiz(
+  void deleteExpedition(
       {required String expeditionId, required BuildContext context}) async {
     state = const AsyncValue.loading();
-    final result = await quizRepository
-        .deleteQuiz(expeditionId)
+    final result = await userQuizRepository
+        .deleteUserQuiz(expeditionId)
         .whenComplete(() => const AsyncValue.data(null));
     result.fold((left) => context.showSnackBar(left.message),
         (right) => context.showSnackBar(right.message));
   }
 
-  FutureEither1<Quiz> getQuizById(
+  FutureEither1<UserQuiz> userQetExpeditionById(
       {required String expeditionId, required BuildContext context}) async {
     state = const AsyncValue.loading();
-    return await quizRepository
-        .getQuizById(expeditionId)
+    return await userQuizRepository
+        .getUserQuizById(expeditionId)
         .whenComplete(() => const AsyncValue.data(null));
   }
 
-  Stream<List<Quiz>> getAllQuizes() {
+  Stream<List<UserQuiz>> getAllQuizes() {
     state = const AsyncValue.loading();
-    final result = quizRepository.getAllQuizes();
+    final result = userQuizRepository.getAllUserQuizes();
     return result;
   }
 }
 
-final quizNotifier = StateNotifierProvider<QuizNotifier, AsyncValue>((ref) {
-  final provider = ref.watch(quizRepositoryProvider);
-  return QuizNotifier(quizRepository: provider);
+final userQuizNotifier =
+    StateNotifierProvider<UserQuizNotifier, AsyncValue>((ref) {
+  final provider = ref.watch(userQuizRepositoryProvider);
+  return UserQuizNotifier(userQuizRepository: provider);
 });

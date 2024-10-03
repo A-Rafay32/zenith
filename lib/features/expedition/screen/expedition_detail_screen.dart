@@ -8,10 +8,16 @@ import 'package:zenith/app/themes/app_colors.dart';
 import 'package:zenith/app/themes/app_paddings.dart';
 import 'package:zenith/core/extensions/routes_extenstion.dart';
 import 'package:zenith/core/extensions/sizes_extensions.dart';
+import 'package:zenith/core/utils/gen_random_ids.dart';
 import 'package:zenith/core/utils/loader.dart';
+import 'package:zenith/features/auth/providers/auth_providers.dart';
 import 'package:zenith/features/auth/screens/widgets/app_bar_white.dart';
+import 'package:zenith/features/auth/screens/widgets/button.dart';
 import 'package:zenith/features/expedition/model/expedtion_detail.dart';
 import 'package:zenith/features/expedition/providers/provider.dart';
+import 'package:zenith/features/quiz/model/quiz_session.dart';
+import 'package:zenith/features/quiz/providers/quiz_session_notifier.dart';
+import 'package:zenith/features/quiz/screen/quiz_detail_screen.dart';
 
 class ExpeditionDetailScreen extends ConsumerWidget {
   const ExpeditionDetailScreen({
@@ -32,6 +38,8 @@ class ExpeditionDetailScreen extends ConsumerWidget {
           List<Widget> pages = List.generate(
               data.length,
               (index) => Page1(
+                    isLastPage: index != data.length - 1 ? false : true,
+                    expeditionId: expeditionId,
                     expeditionName: expeditionName,
                     expeditionDetail: data[index],
                   ));
@@ -57,18 +65,22 @@ class ExpeditionDetailScreen extends ConsumerWidget {
   }
 }
 
-class Page1 extends StatelessWidget {
+class Page1 extends ConsumerWidget {
   const Page1({
     super.key,
     required this.expeditionDetail,
     required this.expeditionName,
+    required this.expeditionId,
+    required this.isLastPage,
   });
 
   final ExpeditionDetail expeditionDetail;
   final String expeditionName;
+  final String expeditionId;
+  final bool isLastPage;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SizedBox(
       height: context.h,
       width: context.w,
@@ -150,7 +162,33 @@ class Page1 extends StatelessWidget {
                 ],
               ),
             ),
-          )
+          ),
+          if (isLastPage)
+            Positioned(
+                bottom: 10,
+                left: context.w * 0.5,
+                child: Button(
+                    press: () async {
+                      String? userId = ref.read(currentUserProvider)?.uid;
+                      print(userId);
+
+                      QuizSession quizSession = QuizSession(
+                          id: generateId(),
+                          quizId: "",
+                          userId: userId.toString(),
+                          userAnswers: [],
+                          currentScore: 0,
+                          attemptCount: 1,
+                          startTime: DateTime.now());
+
+                      ref
+                          .read(quizSessionNotifierProvider.notifier)
+                          .createQuizSession(quizSession, context);
+
+                      ref.context.push(QuizDetailScreen(
+                          quizName: "", expeditionId: expeditionId));
+                    },
+                    text: "Go to Quiz")),
         ],
       ),
     );

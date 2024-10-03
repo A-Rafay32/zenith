@@ -101,19 +101,4 @@ class QuestionRepository {
       rethrow;
     }
   }
-
-  // FutureEither1<List<Bill>> getAllHouseBills(String expeditionsIds) async {
-  //   try {
-  //     QuerySnapshot docs =
-  //         await houseCollection.doc(expeditionsIds).collection("bills").get();
-  //     return Right(docs.docs
-  //         .map((docSnapshot) =>
-  //             Bill.fromMap(docSnapshot.data() as Map<String, dynamic>))
-  //         .toList());
-  //   } on FirebaseException catch (e) {
-  //     throw e.message.toString();
-  //   } catch (e) {
-  //     return Left(Failure(message: e.toString()));
-  //   }
-  // }
 }

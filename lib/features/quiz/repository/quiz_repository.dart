@@ -58,6 +58,34 @@ class QuizRepository {
     }
   }
 
+  Future<Quiz> getQuizByExpeditionId(String expeditionId) async {
+    try {
+      // Querying the quiz collection where the expeditionId matches the provided value
+      QuerySnapshot querySnapshot = await quizCollection
+          .where('expeditionId', isEqualTo: expeditionId)
+          .limit(
+              1) // Limit to 1 result if you expect only one quiz per expedition
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        // Assuming the first document in the list is the result
+        DocumentSnapshot docSnapshot = querySnapshot.docs.first;
+
+        Quiz quiz = Quiz.fromMap(docSnapshot.data() as Map<String, dynamic>);
+        print(quiz.toMap());
+
+        return quiz;
+      } else {
+        throw Exception("Quiz does not exist for the provided expeditionId");
+      }
+    } on FirebaseException catch (e) {
+      throw Exception(e.message);
+    } catch (e) {
+      debugPrint(e.toString());
+      throw Exception("Error fetching quiz: $e");
+    }
+  }
+
   FutureEither0 updateQuizId(
       String quizId, Map<String, dynamic> updatefields) async {
     try {

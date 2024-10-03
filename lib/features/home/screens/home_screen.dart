@@ -17,6 +17,7 @@ import 'package:zenith/features/home/screens/inbox_screen.dart';
 import 'package:zenith/features/home/screens/widgets/app_bars.dart';
 import 'package:zenith/features/home/screens/widgets/custom_navigation_bar.dart';
 import 'package:zenith/features/home/screens/widgets/expedition_card.dart';
+import 'package:zenith/features/quiz/providers/quiz_providers.dart';
 
 class HomeScreen extends ConsumerWidget {
   HomeScreen({super.key});
@@ -71,6 +72,7 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
   @override
   Widget build(BuildContext context) {
     final streamValue = ref.watch(expeditionStreamProvider);
+    final streamValueQuiz = ref.watch(quizStreamProvider);
 
     return Container(
       height: context.h,
@@ -156,6 +158,7 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
                       ],
                     ),
                     AppSizes.normalY,
+
                     // SizedBox(
                     //   height: context.h * 0.25,
                     //   child: ListView.builder(

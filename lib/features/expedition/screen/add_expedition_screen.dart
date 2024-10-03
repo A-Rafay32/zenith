@@ -118,11 +118,16 @@ class _AddRentalHomeScreenState extends ConsumerState<AddExpeditionScreen> {
                     isLoading: ref.watch(expeditionDetailNotifier).isLoading,
                     press: () => addExpedition(ref, context),
                     text: "Add Expedition"),
-
+                AppSizes.largeY,
                 Button(
                     isLoading: ref.watch(quizNotifier).isLoading,
                     press: () => addQuiz(ref, context),
                     text: "Add Quiz"),
+                AppSizes.largeY,
+                Button(
+                    isLoading: ref.watch(questionNotifier).isLoading,
+                    press: () => addQuestions(ref, context),
+                    text: "Add Questions"),
                 AppSizes.largeY,
               ],
             ),
@@ -209,7 +214,7 @@ class _AddRentalHomeScreenState extends ConsumerState<AddExpeditionScreen> {
 
     for (var i = 0; i < qList.length; i++) {
       ref.read(questionNotifier.notifier).addQuestion(
-          adminId: ownerId,   
+          adminId: ownerId,
           question: qList[i],
           context: context,
           quizId: "fa4e54e4-0774-4626-b07a-b229309a99e8");
