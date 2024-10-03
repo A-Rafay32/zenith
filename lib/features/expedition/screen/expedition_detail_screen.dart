@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zenith/app/constants/app_images.dart';
 import 'package:zenith/app/themes/app_colors.dart';
 import 'package:zenith/app/themes/app_paddings.dart';
+import 'package:zenith/core/extensions/routes_extenstion.dart';
 import 'package:zenith/core/extensions/sizes_extensions.dart';
 import 'package:zenith/core/utils/loader.dart';
 import 'package:zenith/features/auth/screens/widgets/app_bar_white.dart';
@@ -30,18 +32,19 @@ class ExpeditionDetailScreen extends ConsumerWidget {
           List<Widget> pages = List.generate(
               data.length,
               (index) => Page1(
+                    expeditionName: expeditionName,
                     expeditionDetail: data[index],
                   ));
 
           return Scaffold(
-            appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(65),
-              child: CustomAppBar(
-                enableBackButton: false,
-                onPressed: () {},
-                text: expeditionName,
-              ),
-            ),
+            // appBar: PreferredSize(
+            //   preferredSize: const Size.fromHeight(65),
+            //   child: CustomAppBar(
+            //     enableBackButton: false,
+            //     onPressed: () {},
+            //     text: expeditionName,
+            //   ),
+            // ),
             body: PageView(children: pages),
           );
         },
@@ -58,9 +61,11 @@ class Page1 extends StatelessWidget {
   const Page1({
     super.key,
     required this.expeditionDetail,
+    required this.expeditionName,
   });
 
   final ExpeditionDetail expeditionDetail;
+  final String expeditionName;
 
   @override
   Widget build(BuildContext context) {
@@ -99,6 +104,26 @@ class Page1 extends StatelessWidget {
                 width: double.infinity,
               ),
             ),
+          ),
+          Positioned(
+            top: 20,
+            left: context.w * 0.5,
+            child: Text(
+              expeditionName,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge
+                  ?.copyWith(fontSize: 16.sp, color: AppColors.textWhiteColor),
+            ),
+          ),
+          Positioned(
+            top: 10,
+            left: 10,
+            child: CupertinoNavigationBarBackButton(
+                color: AppColors.textWhiteColor,
+                onPressed: () {
+                  context.pop();
+                }),
           ),
           Positioned(
             top: context.h * 0.5,

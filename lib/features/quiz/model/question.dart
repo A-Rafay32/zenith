@@ -13,6 +13,7 @@ enum QuestionType {
 class Question {
   final String id;
   final String questionText;
+  final String correctAnswer;
   final QuestionType questionType;
   final List<String> options;
   final int marks;
@@ -21,6 +22,7 @@ class Question {
     required this.id,
     required this.questionText,
     required this.questionType,
+    required this.correctAnswer,
     required this.options,
     this.marks = 1,
   });
@@ -29,6 +31,7 @@ class Question {
     return {
       'id': id,
       'questionText': questionText,
+      'correctAnswer': correctAnswer,
       'questionType': questionType.name.toString(),
       'options': options,
       'marks': marks,
@@ -39,6 +42,7 @@ class Question {
     return Question(
       id: map['id'] ?? '',
       questionText: map['questionText'] ?? '',
+      correctAnswer: map['correctAnswer'] ?? '',
       marks: map['marks'] ?? '',
       questionType: QuestionType.toQuestionType(map['questionType']),
       options: List<String>.from(map['options']),

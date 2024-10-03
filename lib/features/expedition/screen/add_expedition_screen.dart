@@ -16,7 +16,10 @@ import 'package:zenith/features/expedition/model/expedition.dart';
 import 'package:zenith/features/expedition/model/expedtion_detail.dart';
 import 'package:zenith/features/expedition/providers/expedition_detail_notifier.dart';
 import 'package:zenith/features/expedition/providers/expedtion_notifier.dart';
+import 'package:zenith/features/quiz/model/question.dart';
 import 'package:zenith/features/quiz/model/quiz.dart';
+import 'package:zenith/features/quiz/providers/question_notifier.dart';
+import 'package:zenith/features/quiz/providers/quiz_notifier.dart';
 
 enum addHouseEnum { Rental, Seller }
 
@@ -82,39 +85,44 @@ class _AddRentalHomeScreenState extends ConsumerState<AddExpeditionScreen> {
                         AppTextFieldDecorations.genericInputDecoration(
                             label: "Address")),
                 AppSizes.normalY,
-                ...List.generate(
-                  expeditonsContent,
-                  (index) => GestureDetector(
-                    onTap: () => setState(() {
-                      expeditonsContent++;
-                    }),
-                    child: const ExpansionTile(
-                      title: Text('Add Info'),
-                      subtitle: Text('Subtitle of the tile'),
-                      leading: Icon(Icons.info),
-                      trailing: Icon(Icons.expand_more),
-                      children: <Widget>[
-                        ListTile(
-                          title: Text('Item 1'),
-                          leading: Icon(Icons.arrow_right),
-                        ),
-                        ListTile(
-                          title: Text('Item 2'),
-                          leading: Icon(Icons.arrow_right),
-                        ),
-                        ListTile(
-                          title: Text('Item 3'),
-                          leading: Icon(Icons.arrow_right),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                // ...List.generate(
+                //   expeditonsContent,
+                //   (index) => GestureDetector(
+                //     onTap: () => setState(() {
+                //       expeditonsContent++;
+                //     }),
+                //     child: const ExpansionTile(
+                //       title: Text('Add Info'),
+                //       subtitle: Text('Subtitle of the tile'),
+                //       leading: Icon(Icons.info),
+                //       trailing: Icon(Icons.expand_more),
+                //       children: <Widget>[
+                //         ListTile(
+                //           title: Text('Item 1'),
+                //           leading: Icon(Icons.arrow_right),
+                //         ),
+                //         ListTile(
+                //           title: Text('Item 2'),
+                //           leading: Icon(Icons.arrow_right),
+                //         ),
+                //         ListTile(
+                //           title: Text('Item 3'),
+                //           leading: Icon(Icons.arrow_right),
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
 
                 Button(
                     isLoading: ref.watch(expeditionDetailNotifier).isLoading,
                     press: () => addExpedition(ref, context),
                     text: "Add Expedition"),
+
+                Button(
+                    isLoading: ref.watch(quizNotifier).isLoading,
+                    press: () => addQuiz(ref, context),
+                    text: "Add Quiz"),
                 AppSizes.largeY,
               ],
             ),
@@ -122,12 +130,90 @@ class _AddRentalHomeScreenState extends ConsumerState<AddExpeditionScreen> {
     );
   }
 
-  void addQuizScreen(WidgetRef ref, BuildContext context) async {
-    // Quiz(
-    //     id: id,
-    //     expeditionId: expeditionId,
-    //     correctAnswers: correctAnswers,
-    //     passingCriteria: passingCriteria);
+  void addQuiz(WidgetRef ref, BuildContext context) async {
+    String? ownerId = ref.read(currentUserProvider)?.uid;
+    Quiz q = Quiz(
+        id: generateId(),
+        expeditionId: "4ca94538-32d6-4a71-a0c7-5d5c3d1ba4d6",
+        correctAnswers: [],
+        passingCriteria: 5);
+
+    ref.read(quizNotifier.notifier).addQuiz(
+          adminId: ownerId,
+          quiz: q,
+          context: context,
+        );
+  }
+
+  void addQuestions(WidgetRef ref, BuildContext context) async {
+    String? ownerId = ref.read(currentUserProvider)?.uid;
+    print(ownerId);
+
+    List<Question> qList = [
+      Question(
+          id: generateId(),
+          questionText:
+              "Stars are giant balls of hot gas – mostly hydrogen, with some helium and small amounts of other elements.",
+          questionType: QuestionType.trueFalse,
+          options: ["True", "False"],
+          correctAnswer: "True"),
+      Question(
+          id: generateId(),
+          questionText: "Stars form in large clouds of gas and dust called ?",
+          questionType: QuestionType.singleChoice,
+          options: ["Molecular Cloud", "Dust Clouds", "Gas Clouds"],
+          correctAnswer: "Molecular Clouds"),
+      Question(
+          id: generateId(),
+          questionText:
+              "Batches of stars that have recently formed from molecular clouds are often called stellar clusters.",
+          questionType: QuestionType.trueFalse,
+          options: ["True", "False"],
+          correctAnswer: "True"),
+      Question(
+          id: generateId(),
+          questionText:
+              "Nuclear fission releases energy, which heats the star and prevents it from further collapsing under the force of gravity.",
+          questionType: QuestionType.trueFalse,
+          options: ["True", "False"],
+          correctAnswer: "False"),
+      Question(
+          id: generateId(),
+          questionText:
+              "More massive stars must burn fuel at a higher rate to generate the energy that keeps them from collapsing under their own weight",
+          questionType: QuestionType.trueFalse,
+          options: ["True", "False"],
+          correctAnswer: "True"),
+      Question(
+          id: generateId(),
+          questionText:
+              "A low-mass star’s atmosphere will keep expanding until it becomes a subgiant or giant star while fusion converts ? into carbon in the core",
+          questionType: QuestionType.singleChoice,
+          options: ["Helium", "Carbon", "Nitrogen", "Hydrogen"],
+          correctAnswer: "Helium"),
+      Question(
+          id: generateId(),
+          questionText:
+              "Stars are giant balls of hot gas – mostly hydrogen, with some helium and small amounts of other elements.",
+          questionType: QuestionType.trueFalse,
+          options: ["True", "False"],
+          correctAnswer: "True"),
+      Question(
+          id: generateId(),
+          questionText:
+              "The star’s iron core collapses until forces between the nuclei push the brakes, then it rebounds. The result is a huge explosion called a ?",
+          questionType: QuestionType.singleChoice,
+          options: ["Supernova", "nebula", "blackhole"],
+          correctAnswer: "Supernova"),
+    ];
+
+    for (var i = 0; i < qList.length; i++) {
+      ref.read(questionNotifier.notifier).addQuestion(
+          adminId: ownerId,   
+          question: qList[i],
+          context: context,
+          quizId: "fa4e54e4-0774-4626-b07a-b229309a99e8");
+    }
   }
 
   void addExpedition(WidgetRef ref, BuildContext context) async {

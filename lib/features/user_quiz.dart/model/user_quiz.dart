@@ -2,22 +2,22 @@ import 'dart:convert';
 
 import 'package:zenith/features/user_quiz.dart/model/user_answer.dart';
 
-class QuizSession {
+class UserQuiz {
   final String id;
   final String quizId;
-  final String userId;
   final List<UserAnswer> userAnswers;
-  final int currentScore;
-  final int currentQuestionIndex;
+  final int finalScore;
+  final bool isPassed;
+  final DateTime completionTime;
   final int attemptCount;
 
-  QuizSession({
+  UserQuiz({
     required this.id,
     required this.quizId,
-    required this.userId,
     required this.userAnswers,
-    required this.currentScore,
-    required this.currentQuestionIndex,
+    required this.finalScore,
+    required this.isPassed,
+    required this.completionTime,
     required this.attemptCount,
   });
 
@@ -25,29 +25,30 @@ class QuizSession {
     return {
       'id': id,
       'quizId': quizId,
-      'userId': userId,
       'userAnswers': userAnswers.map((x) => x.toMap()).toList(),
-      'currentScore': currentScore,
-      'currentQuestionIndex': currentQuestionIndex,
+      'finalScore': finalScore,
+      'isPassed': isPassed,
+      'completionTime': completionTime.millisecondsSinceEpoch,
       'attemptCount': attemptCount,
     };
   }
 
-  factory QuizSession.fromMap(Map<String, dynamic> map) {
-    return QuizSession(
+  factory UserQuiz.fromMap(Map<String, dynamic> map) {
+    return UserQuiz(
       id: map['id'] ?? '',
       quizId: map['quizId'] ?? '',
-      userId: map['userId'] ?? '',
       userAnswers: List<UserAnswer>.from(
           map['userAnswers']?.map((x) => UserAnswer.fromMap(x))),
-      currentScore: map['currentScore']?.toInt() ?? 0,
-      currentQuestionIndex: map['currentQuestionIndex']?.toInt() ?? 0,
+      finalScore: map['finalScore']?.toInt() ?? 0,
+      isPassed: map['isPassed'] ?? false,
+      completionTime:
+          DateTime.fromMillisecondsSinceEpoch(map['completionTime']),
       attemptCount: map['attemptCount']?.toInt() ?? 0,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory QuizSession.fromJson(String source) =>
-      QuizSession.fromMap(json.decode(source));
+  factory UserQuiz.fromJson(String source) =>
+      UserQuiz.fromMap(json.decode(source));
 }
