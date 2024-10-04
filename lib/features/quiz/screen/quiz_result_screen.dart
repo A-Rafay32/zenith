@@ -35,7 +35,7 @@ class QuizResultScreen extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(64),
         child: CustomAppBar(
-          enableBackButton: true,
+          enableBackButton: false,
           onPressed: () {},
           text: "Quiz Result",
         ),

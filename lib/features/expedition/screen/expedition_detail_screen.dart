@@ -120,7 +120,7 @@ class Page1 extends ConsumerWidget {
               expeditionName,
               style: Theme.of(context)
                   .textTheme
-                  .titleMedium
+                  .headlineMedium
                   ?.copyWith(color: AppColors.textWhiteColor),
             ),
           ),
@@ -143,10 +143,10 @@ class Page1 extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(expeditionDetail.text,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineLarge
-                              ?.copyWith(color: AppColors.textWhiteColor)),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineLarge
+                          ?.copyWith(color: AppColors.textWhiteColor)),
                   AppSizes.largeY,
                   Text(
                     expeditionDetail.description,
@@ -162,7 +162,7 @@ class Page1 extends ConsumerWidget {
           if (isLastPage)
             Positioned(
                 bottom: 10,
-                left: context.w * 0.5,
+                left: context.w * 0.3,
                 child: Button(
                     press: () async {
                       String? userId = ref.read(currentUserProvider)?.uid;

@@ -45,8 +45,11 @@ class QuizSessionNotifier extends StateNotifier<AsyncValue<QuizSession?>> {
         .updateQuizSession(sessionId, updatedField)
         .whenComplete(() => const AsyncValue.data(null));
 
-    result.fold((left) => context.showSnackBar(left.message),
-        (right) => context.showSnackBar(right.message));
+    result.fold((left) {
+      print(left.message);
+    }, (right) {
+      print(right.message);
+    });
   }
 
   Future<void> deleteQuizSession(String sessionId, BuildContext context) async {
@@ -55,8 +58,11 @@ class QuizSessionNotifier extends StateNotifier<AsyncValue<QuizSession?>> {
         .deleteQuizSession(sessionId)
         .whenComplete(() => const AsyncValue.data(null));
 
-    result.fold((left) => context.showSnackBar(left.message),
-        (right) => context.showSnackBar(right.message));
+    result.fold((left) {
+      print(left.message);
+    }, (right) {
+      print(right.message);
+    });
   }
 }
 

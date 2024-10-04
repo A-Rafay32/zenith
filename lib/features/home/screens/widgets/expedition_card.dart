@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:zenith/app/constants/app_images.dart';
 import 'package:zenith/app/themes/app_styles.dart';
 import 'package:zenith/app/themes/app_colors.dart';
 import 'package:zenith/app/themes/app_paddings.dart';
@@ -49,19 +50,30 @@ class _ExpeditionCardWidgetState extends State<ExpeditionCardWidget> {
             // mainAxisSize: MainAxisSize.min,
             children: [
               CachedNetworkImage(
-                imageUrl: widget.image.toString(),
-                width: 300.w,
-                imageBuilder: (context, imageProvider) => Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    image: DecorationImage(
-                        image: imageProvider, fit: BoxFit.cover),
-                  ),
-                ),
-                progressIndicatorBuilder: (context, url, downloadProgress) =>
-                    CircularProgressIndicator(value: downloadProgress.progress),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
-              ),
+                  imageUrl: widget.image.toString(),
+                  width: 300.w,
+                  imageBuilder: (context, imageProvider) => Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          image: DecorationImage(
+                              image: imageProvider, fit: BoxFit.cover),
+                        ),
+                      ),
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      SizedBox(
+                          height: 40.h,
+                          width: 40.w,
+                          child: CircularProgressIndicator(
+                              value: downloadProgress.progress)),
+                  errorWidget: (context, url, error) => ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Image.asset(
+                          AppImages.defaultImage,
+                          width: 300.w,
+                          fit: BoxFit.cover,
+                        ),
+                      )),
+
               // HouseImageView(
               //   width: 300.w,
               //   isPremium: true,
@@ -87,14 +99,17 @@ class _ExpeditionCardWidgetState extends State<ExpeditionCardWidget> {
               ),
         ),
         AppSizes.tinyY,
-        Text(
-          widget.description,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-          style: Theme.of(context)
-              .textTheme
-              .bodySmall
-              ?.copyWith(fontSize: 10.sp, color: AppColors.textWhiteColor),
+        SizedBox(
+          width: 300.w,
+          child: Text(
+            widget.description,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context)
+                .textTheme
+                .bodySmall
+                ?.copyWith(fontSize: 10.sp, color: AppColors.textWhiteColor),
+          ),
         ),
       ],
     );

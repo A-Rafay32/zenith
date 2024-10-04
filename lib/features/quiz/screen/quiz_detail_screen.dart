@@ -20,6 +20,7 @@ import 'package:zenith/features/quiz/model/quiz_session.dart';
 import 'package:zenith/features/quiz/providers/question_providers.dart';
 import 'package:zenith/features/quiz/providers/quiz_providers.dart';
 import 'package:zenith/features/quiz/providers/quiz_session_notifier.dart';
+import 'package:zenith/features/quiz/screen/quiz_result_screen.dart';
 import 'package:zenith/features/user_quiz.dart/model/user_quiz.dart';
 import 'package:zenith/features/user_quiz.dart/providers/user_quiz_notifier.dart';
 
@@ -47,36 +48,27 @@ class QuizDetailScreen extends ConsumerWidget {
     //     error: (error, stackTrace) {},
     //     loading: () {});
 
-    return streamValue.when(
-        data: (data) {
-          List<Widget> pages = List.generate(
-              data.length,
-              (index) => QuizPage(
-                    quiz: quiz,
-                    isLastPage: index != data.length - 1 ? false : true,
-                    quizSessionId: quizSessionId,
-                    index: index,
-                    question: data[index],
-                  ));
-
-          return Scaffold(
-            appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(65),
-              child: CustomAppBar(
-                enableBackButton: false,
-                onPressed: () {},
-                text: "",
-              ),
-            ),
-            body: PageView(children: pages),
-          );
-        },
-        error: (error, stackTrace) {
-          print("error : ${error.toString()} stackTrace: $stackTrace");
-          return Text("error : ${error.toString()} ",
-              style: const TextStyle(color: Colors.white));
-        },
-        loading: () => const Loader());
+    return Scaffold(
+      body: streamValue.when(
+          data: (data) {
+            List<Widget> pages = List.generate(
+                data.length,
+                (index) => QuizPage(
+                      quiz: quiz,
+                      isLastPage: index != data.length - 1 ? false : true,
+                      quizSessionId: quizSessionId,
+                      index: index,
+                      question: data[index],
+                    ));
+            return PageView(children: pages);
+          },
+          error: (error, stackTrace) {
+            print("error : ${error.toString()} stackTrace: $stackTrace");
+            return Text("error : ${error.toString()} ",
+                style: const TextStyle(color: Colors.white));
+          },
+          loading: () => const Loader()),
+    );
   }
 }
 
@@ -142,15 +134,7 @@ class _QuizPageState extends ConsumerState<QuizPage> {
           //         ?.copyWith(fontSize: 16.sp, color: AppColors.textWhiteColor),
           //   ),
           // ),
-          Positioned(
-            top: 10,
-            left: 10,
-            child: CupertinoNavigationBarBackButton(
-                color: AppColors.textWhiteColor,
-                onPressed: () {
-                  context.pop();
-                }),
-          ),
+
           Positioned(
             top: context.h * 0.4,
             child: Container(
@@ -239,6 +223,14 @@ class _QuizPageState extends ConsumerState<QuizPage> {
                                 userQuiz: userQuiz,
                                 adminId: userQuiz.userId,
                                 context: context);
+
+                            context.pushReplacement(QuizResultScreen(
+                                isPassed: true,
+                                score: 7,
+                                totalQuestions: 10,
+                                attemptCount: 1,
+                                startTime: DateTime.now(),
+                                endTime: DateTime.now()));
                           });
                         },
                         text: "Submit")

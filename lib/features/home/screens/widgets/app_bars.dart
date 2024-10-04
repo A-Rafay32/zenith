@@ -7,21 +7,21 @@ final List<Widget> appBars = [
   CustomAppBar(
     enableBackButton: false,
     onPressed: () {},
-    text: "Explore Estates",
+    text: "Explore Space",
   ),
   CustomAppBar(
     enableBackButton: false,
     onPressed: () {},
-    text: "Favourites",
-  ),
-  CustomAppBar(
-    enableBackButton: false,
-    onPressed: () {},
-    text: "Inbox",
+    text: "Track",
   ),
   CustomAppBar(
     enableBackButton: false,
     onPressed: () {},
     text: "Profile",
   ),
+  // CustomAppBar(
+  //   enableBackButton: false,
+  //   onPressed: () {},
+  //   text: "Profile",
+  // ),
 ];

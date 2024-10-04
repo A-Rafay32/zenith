@@ -114,7 +114,7 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
                     AppSizes.normalY,
                     Row(
                       children: [
-                        Text("More of what you like ",
+                        Text("Recently visited",
                             style: Theme.of(context).textTheme.headlineSmall),
                         const Spacer(),
                         // const Text("View All"),
@@ -139,25 +139,6 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
                             onTapFav: () {}),
                       ),
                     ),
-                    AppSizes.normalY,
-                    Row(
-                      children: [
-                        Text("Recently Played",
-                            style: Theme.of(context).textTheme.headlineSmall),
-                        const Spacer(),
-                        // const Text("View All"),
-                      ],
-                    ),
-                    AppSizes.normalY,
-                    Row(
-                      children: [
-                        Text("Suggested",
-                            style: Theme.of(context).textTheme.headlineSmall),
-                        const Spacer(),
-                        // const Text("View All"),
-                      ],
-                    ),
-                    AppSizes.normalY,
 
                     // SizedBox(
                     //   height: context.h * 0.25,

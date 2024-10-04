@@ -31,7 +31,7 @@ class _ForgotState extends State<Forgot> {
           ),
           const Text(
             "Remember me",
-            style: TextStyle(color: AppColors.primaryColor),
+            style: TextStyle(color: AppColors.textWhiteColor),
           ),
           const Spacer(),
           GestureDetector(
@@ -42,7 +42,7 @@ class _ForgotState extends State<Forgot> {
               "Forgot Password?",
               style: TextStyle(
                   decoration: TextDecoration.underline,
-                  color: AppColors.primaryColor),
+                  color: AppColors.textWhiteColor),
             ),
           ),
         ],
