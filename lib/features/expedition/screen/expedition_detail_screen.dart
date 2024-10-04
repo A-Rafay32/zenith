@@ -185,8 +185,10 @@ class Page1 extends ConsumerWidget {
                           .read(quizSessionNotifierProvider.notifier)
                           .createQuizSession(quizSession, context);
 
-                      ref.context.push(QuizDetailScreen(
-                          quizName: "", expeditionId: expeditionId));
+                      context.push(QuizDetailScreen(
+                          quizSessionId: quizSession.id,
+                          quizName: "",
+                          expeditionId: expeditionId));
                     },
                     text: "Go to Quiz")),
         ],

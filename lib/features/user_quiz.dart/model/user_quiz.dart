@@ -5,6 +5,7 @@ import 'package:zenith/features/user_quiz.dart/model/user_answer.dart';
 class UserQuiz {
   final String id;
   final String quizId;
+  final String userId;
   final List<UserAnswer> userAnswers;
   final int finalScore;
   final bool isPassed;
@@ -14,6 +15,7 @@ class UserQuiz {
   UserQuiz({
     required this.id,
     required this.quizId,
+    required this.userId,
     required this.userAnswers,
     required this.finalScore,
     required this.isPassed,
@@ -25,6 +27,7 @@ class UserQuiz {
     return {
       'id': id,
       'quizId': quizId,
+      'userId': userId,
       'userAnswers': userAnswers.map((x) => x.toMap()).toList(),
       'finalScore': finalScore,
       'isPassed': isPassed,
@@ -37,6 +40,7 @@ class UserQuiz {
     return UserQuiz(
       id: map['id'] ?? '',
       quizId: map['quizId'] ?? '',
+      userId: map['userId'] ?? '',
       userAnswers: List<UserAnswer>.from(
           map['userAnswers']?.map((x) => UserAnswer.fromMap(x))),
       finalScore: map['finalScore']?.toInt() ?? 0,

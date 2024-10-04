@@ -52,6 +52,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '785019622876',
     projectId: 'zenith-08',
     authDomain: 'zenith-08.firebaseapp.com',
+    databaseURL:
+        "https://zenith-08-default-rtdb.asia-southeast1.firebasedatabase.app",
     storageBucket: 'zenith-08.appspot.com',
   );
 
@@ -60,6 +62,8 @@ class DefaultFirebaseOptions {
     appId: '1:785019622876:android:ddd33de79cfd8aebbc6b19',
     messagingSenderId: '785019622876',
     projectId: 'zenith-08',
+    databaseURL:
+        "https://zenith-08-default-rtdb.asia-southeast1.firebasedatabase.app",
     storageBucket: 'zenith-08.appspot.com',
   );
 
@@ -68,6 +72,8 @@ class DefaultFirebaseOptions {
     appId: '1:785019622876:ios:b848f09a238e6aa0bc6b19',
     messagingSenderId: '785019622876',
     projectId: 'zenith-08',
+    databaseURL:
+        "https://zenith-08-default-rtdb.asia-southeast1.firebasedatabase.app",
     storageBucket: 'zenith-08.appspot.com',
     iosBundleId: 'com.example.zenith',
   );

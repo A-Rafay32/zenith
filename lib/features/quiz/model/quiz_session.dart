@@ -5,7 +5,7 @@ class QuizSession {
   final String id;
   final String quizId;
   final String userId;
-  final List<UserAnswer> userAnswers;
+  final List<UserAnswer>? userAnswers;
   final int currentScore;
   final int? currentQuestionIndex;
   final int attemptCount;
@@ -27,7 +27,7 @@ class QuizSession {
       'id': id,
       'quizId': quizId,
       'userId': userId,
-      'userAnswers': userAnswers.map((x) => x.toMap()).toList(),
+      'userAnswers': (userAnswers)?.map((e) => e.toMap()).toList() ?? [],
       'currentScore': currentScore,
       'currentQuestionIndex': currentQuestionIndex,
       'attemptCount': attemptCount,
@@ -40,8 +40,11 @@ class QuizSession {
       id: map['id'] ?? '',
       quizId: map['quizId'] ?? '',
       userId: map['userId'] ?? '',
-      userAnswers: List<UserAnswer>.from(
-          map['userAnswers']?.map((x) => UserAnswer.fromMap(x))),
+      userAnswers: [],
+      // userAnswers: map['userAnswers'] (map['userAnswers'] as List)
+      //         .map((x) => UserAnswer.fromMap(x))
+      //         .toList() ??
+      //     [],
       currentScore: map['currentScore']?.toInt() ?? 0,
       currentQuestionIndex: map['currentQuestionIndex']?.toInt() ?? 0,
       attemptCount: map['attemptCount']?.toInt() ?? 0,

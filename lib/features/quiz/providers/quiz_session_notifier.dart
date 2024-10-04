@@ -28,21 +28,21 @@ class QuizSessionNotifier extends StateNotifier<AsyncValue<QuizSession?>> {
     });
   }
 
-  // FutureEither1<QuizSession> getQuizSession(
-  //     String sessionId, BuildContext context) async {
-  //   state = const AsyncValue.loading();
-  //   final result = await quizSessionRepository
-  //       .getQuizSession(sessionId)
-  //       .whenComplete(() => const AsyncValue.data(null));
+  Future<QuizSession> getQuizSession(
+      String sessionId, BuildContext context) async {
+    state = const AsyncValue.loading();
+    return await quizSessionRepository
+        .getQuizSession(sessionId)
+        .whenComplete(() => const AsyncValue.data(null));
 
-  //   result.fold((left) => context.showSnackBar(left.message), (right) => right);
-  // }
+    // return result.fold((left) => left, (right) => right);
+  }
 
-  Future<void> updateQuizSession(
-      String sessionId, QuizSession quizSession, BuildContext context) async {
+  Future<void> updateQuizSession(String sessionId,
+      Map<String, dynamic> updatedField, BuildContext context) async {
     state = const AsyncValue.loading();
     final result = await quizSessionRepository
-        .updateQuizSession(sessionId, quizSession)
+        .updateQuizSession(sessionId, updatedField)
         .whenComplete(() => const AsyncValue.data(null));
 
     result.fold((left) => context.showSnackBar(left.message),

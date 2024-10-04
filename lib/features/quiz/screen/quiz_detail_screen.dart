@@ -8,22 +8,30 @@ import 'package:zenith/app/themes/app_colors.dart';
 import 'package:zenith/app/themes/app_paddings.dart';
 import 'package:zenith/core/extensions/routes_extenstion.dart';
 import 'package:zenith/core/extensions/sizes_extensions.dart';
+import 'package:zenith/core/utils/gen_random_ids.dart';
 import 'package:zenith/core/utils/loader.dart';
+import 'package:zenith/features/auth/screens/widgets/button.dart';
 import 'package:zenith/features/expedition/model/expedtion_detail.dart';
 import 'package:zenith/features/expedition/providers/provider.dart';
 import 'package:zenith/features/quiz/model/question.dart';
+import 'package:zenith/features/quiz/model/quiz_session.dart';
 import 'package:zenith/features/quiz/providers/question_providers.dart';
 import 'package:zenith/features/quiz/providers/quiz_providers.dart';
+import 'package:zenith/features/quiz/providers/quiz_session_notifier.dart';
+import 'package:zenith/features/user_quiz.dart/model/user_quiz.dart';
+import 'package:zenith/features/user_quiz.dart/providers/user_quiz_notifier.dart';
 
 class QuizDetailScreen extends ConsumerWidget {
   const QuizDetailScreen({
     super.key,
     required this.quizName,
     required this.expeditionId,
+    required this.quizSessionId,
   });
 
   final String quizName;
   final String expeditionId;
+  final String quizSessionId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -34,6 +42,8 @@ class QuizDetailScreen extends ConsumerWidget {
           List<Widget> pages = List.generate(
               data.length,
               (index) => QuizPage(
+                    isLastPage: index != data.length - 1 ? false : true,
+                    quizSessionId: quizSessionId,
                     index: index,
                     question: data[index],
                   ));
@@ -64,14 +74,20 @@ class QuizPage extends ConsumerStatefulWidget {
     super.key,
     required this.question,
     required this.index,
+    required this.quizSessionId,
+    required this.isLastPage,
   });
 
   final Question question;
   final int index;
+  final String quizSessionId;
+  final bool isLastPage;
 
   @override
   ConsumerState<QuizPage> createState() => _QuizPageState();
 }
+
+final scoreProvider = StateProvider((ref) => 0);
 
 class _QuizPageState extends ConsumerState<QuizPage> {
   List<bool> userAnswers = [];
@@ -84,6 +100,8 @@ class _QuizPageState extends ConsumerState<QuizPage> {
     userAnswers =
         List.generate(widget.question.options.length, (index) => false);
   }
+
+  String selectedAnswer = '';
 
   @override
   Widget build(BuildContext context) {
@@ -153,7 +171,20 @@ class _QuizPageState extends ConsumerState<QuizPage> {
                                   userAnswers[i] =
                                       (i == index) ? value! : false;
                                 }
+                                selectedAnswer = widget.question.options[index];
+                                print(selectedAnswer);
                               });
+
+                              if (selectedAnswer ==
+                                  widget.question.correctAnswer) {
+                                ref.read(scoreProvider.notifier).state += 1;
+                                int score =
+                                    ref.read(scoreProvider.notifier).state;
+                                ref
+                                    .read(quizSessionNotifierProvider.notifier)
+                                    .updateQuizSession(widget.quizSessionId,
+                                        {"currentScore": score}, context);
+                              }
                             }),
                         AppSizes.smallX,
                         Text(
@@ -166,6 +197,35 @@ class _QuizPageState extends ConsumerState<QuizPage> {
                       ],
                     ),
                   ),
+                  const Spacer(),
+                  if (widget.isLastPage)
+                    Button(
+                        press: () async {
+                          await ref
+                              .read(quizSessionNotifierProvider.notifier)
+                              .getQuizSession(widget.quizSessionId, context)
+                              .then((value) {
+                            UserQuiz userQuiz = UserQuiz(
+                                id: generateId(),
+                                quizId: value.quizId,
+                                userAnswers: value.userAnswers ?? [],
+                                finalScore: value.currentScore,
+                                userId: value.userId,
+                                isPassed: value.currentScore > 10,
+                                completionTime: DateTime.now(),
+                                attemptCount: value.attemptCount);
+                            ref
+                                .read(quizSessionNotifierProvider.notifier)
+                                .deleteQuizSession(
+                                    widget.quizSessionId, context);
+
+                            ref.read(userQuizNotifier.notifier).addUserQuiz(
+                                userQuiz: userQuiz,
+                                adminId: userQuiz.userId,
+                                context: context);
+                          });
+                        },
+                        text: "Submit")
                 ],
               ),
             ),

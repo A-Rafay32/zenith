@@ -20,7 +20,7 @@ class UserQuizNotifier extends StateNotifier<AsyncValue> {
 
   final UserQuizRepository userQuizRepository;
 
-  void addQuiz(
+  void addUserQuiz(
       {required UserQuiz userQuiz,
       required String? adminId,
       required BuildContext context}) async {
@@ -32,7 +32,7 @@ class UserQuizNotifier extends StateNotifier<AsyncValue> {
         (right) => context.showSnackBar(right.message));
   }
 
-  void updateExpeditionById(
+  void updateUserQuizById(
       {required String quizId,
       required Map<String, dynamic> updatefields,
       required BuildContext context}) async {
@@ -44,7 +44,7 @@ class UserQuizNotifier extends StateNotifier<AsyncValue> {
         (right) => context.showSnackBar(right.message));
   }
 
-  void deleteExpedition(
+  void deleteUserQuiz(
       {required String expeditionId, required BuildContext context}) async {
     state = const AsyncValue.loading();
     final result = await userQuizRepository
@@ -54,7 +54,7 @@ class UserQuizNotifier extends StateNotifier<AsyncValue> {
         (right) => context.showSnackBar(right.message));
   }
 
-  FutureEither1<UserQuiz> userQetExpeditionById(
+  FutureEither1<UserQuiz> getuserQuizById(
       {required String expeditionId, required BuildContext context}) async {
     state = const AsyncValue.loading();
     return await userQuizRepository
@@ -62,7 +62,7 @@ class UserQuizNotifier extends StateNotifier<AsyncValue> {
         .whenComplete(() => const AsyncValue.data(null));
   }
 
-  Stream<List<UserQuiz>> getAllQuizes() {
+  Stream<List<UserQuiz>> getAllUserQuizes() {
     state = const AsyncValue.loading();
     final result = userQuizRepository.getAllUserQuizes();
     return result;
