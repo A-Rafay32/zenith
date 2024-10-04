@@ -10,3 +10,9 @@ final quizStreamProvider = StreamProvider((ref) {
   final repository = ref.watch(quizRepositoryProvider);
   return repository.getAllQuizes();
 });
+
+final getQuizByExpeditionIdProvider =
+    FutureProvider.family((ref, String expeditionId) async {
+  final provider = ref.read(quizRepositoryProvider);
+  return provider.getQuizByExpeditionId(expeditionId);
+});

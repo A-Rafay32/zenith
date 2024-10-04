@@ -14,6 +14,7 @@ import 'package:zenith/features/auth/screens/widgets/button.dart';
 import 'package:zenith/features/expedition/model/expedtion_detail.dart';
 import 'package:zenith/features/expedition/providers/provider.dart';
 import 'package:zenith/features/quiz/model/question.dart';
+import 'package:zenith/features/quiz/model/quiz.dart';
 import 'package:zenith/features/quiz/model/quiz_session.dart';
 import 'package:zenith/features/quiz/providers/question_providers.dart';
 import 'package:zenith/features/quiz/providers/quiz_providers.dart';
@@ -24,24 +25,33 @@ import 'package:zenith/features/user_quiz.dart/providers/user_quiz_notifier.dart
 class QuizDetailScreen extends ConsumerWidget {
   const QuizDetailScreen({
     super.key,
-    required this.quizName,
+    required this.quiz,
     required this.expeditionId,
     required this.quizSessionId,
   });
 
-  final String quizName;
+  final Quiz quiz;
   final String expeditionId;
   final String quizSessionId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final streamValue = ref.watch(questionStreamProvider(expeditionId));
+    // final quizValue = ref.watch(getQuizByExpeditionIdProvider(expeditionId));
+
+    // Quiz? q;
+
+    // quizValue.when(
+    //     data: (data) => q = data,
+    //     error: (error, stackTrace) {},
+    //     loading: () {});
 
     return streamValue.when(
         data: (data) {
           List<Widget> pages = List.generate(
               data.length,
               (index) => QuizPage(
+                    quiz: quiz,
                     isLastPage: index != data.length - 1 ? false : true,
                     quizSessionId: quizSessionId,
                     index: index,
@@ -73,12 +83,14 @@ class QuizPage extends ConsumerStatefulWidget {
   const QuizPage({
     super.key,
     required this.question,
+    required this.quiz,
     required this.index,
     required this.quizSessionId,
     required this.isLastPage,
   });
 
   final Question question;
+  final Quiz quiz;
   final int index;
   final String quizSessionId;
   final bool isLastPage;
@@ -211,7 +223,10 @@ class _QuizPageState extends ConsumerState<QuizPage> {
                                 userAnswers: value.userAnswers ?? [],
                                 finalScore: value.currentScore,
                                 userId: value.userId,
-                                isPassed: value.currentScore > 10,
+                                isPassed: value.currentScore >=
+                                        widget.quiz.passingCriteria
+                                    ? true
+                                    : false,
                                 completionTime: DateTime.now(),
                                 attemptCount: value.attemptCount);
                             ref

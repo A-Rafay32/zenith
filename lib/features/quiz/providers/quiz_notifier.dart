@@ -52,10 +52,18 @@ class QuizNotifier extends StateNotifier<AsyncValue> {
   }
 
   FutureEither1<Quiz> getQuizById(
+      {required String quizId, required BuildContext context}) async {
+    state = const AsyncValue.loading();
+    return await quizRepository
+        .getQuizById(quizId)
+        .whenComplete(() => const AsyncValue.data(null));
+  }
+
+  Future<Quiz> getQuizByExpeditionId(
       {required String expeditionId, required BuildContext context}) async {
     state = const AsyncValue.loading();
     return await quizRepository
-        .getQuizById(expeditionId)
+        .getQuizByExpeditionId(expeditionId)
         .whenComplete(() => const AsyncValue.data(null));
   }
 

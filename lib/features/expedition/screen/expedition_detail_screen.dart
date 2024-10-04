@@ -16,6 +16,8 @@ import 'package:zenith/features/auth/screens/widgets/button.dart';
 import 'package:zenith/features/expedition/model/expedtion_detail.dart';
 import 'package:zenith/features/expedition/providers/provider.dart';
 import 'package:zenith/features/quiz/model/quiz_session.dart';
+import 'package:zenith/features/quiz/providers/quiz_notifier.dart';
+import 'package:zenith/features/quiz/providers/quiz_providers.dart';
 import 'package:zenith/features/quiz/providers/quiz_session_notifier.dart';
 import 'package:zenith/features/quiz/screen/quiz_detail_screen.dart';
 
@@ -172,23 +174,29 @@ class Page1 extends ConsumerWidget {
                       String? userId = ref.read(currentUserProvider)?.uid;
                       print(userId);
 
-                      QuizSession quizSession = QuizSession(
-                          id: generateId(),
-                          quizId: "",
-                          userId: userId.toString(),
-                          userAnswers: [],
-                          currentScore: 0,
-                          attemptCount: 1,
-                          startTime: DateTime.now());
+                      await ref
+                          .read(quizNotifier.notifier)
+                          .getQuizByExpeditionId(
+                              expeditionId: expeditionId, context: context)
+                          .then((value) {
+                        QuizSession quizSession = QuizSession(
+                            id: generateId(),
+                            quizId: value.id,
+                            userId: userId.toString(),
+                            userAnswers: [],
+                            currentScore: 0,
+                            attemptCount: 1,
+                            startTime: DateTime.now());
 
-                      ref
-                          .read(quizSessionNotifierProvider.notifier)
-                          .createQuizSession(quizSession, context);
+                        ref
+                            .read(quizSessionNotifierProvider.notifier)
+                            .createQuizSession(quizSession, context);
 
-                      context.push(QuizDetailScreen(
-                          quizSessionId: quizSession.id,
-                          quizName: "",
-                          expeditionId: expeditionId));
+                        context.push(QuizDetailScreen(
+                            quizSessionId: quizSession.id,
+                            quiz: value,
+                            expeditionId: expeditionId));
+                      });
                     },
                     text: "Go to Quiz")),
         ],
