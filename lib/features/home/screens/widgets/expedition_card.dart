@@ -50,6 +50,7 @@ class _ExpeditionCardWidgetState extends State<ExpeditionCardWidget> {
             children: [
               CachedNetworkImage(
                 imageUrl: widget.image.toString(),
+                width: 300.w,
                 imageBuilder: (context, imageProvider) => Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
@@ -81,7 +82,7 @@ class _ExpeditionCardWidgetState extends State<ExpeditionCardWidget> {
       children: [
         Text(
           widget.name.toString(),
-          style: Theme.of(context).textTheme.titleSmall?.copyWith(
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 color: AppColors.textWhiteColor,
               ),
         ),
@@ -93,7 +94,7 @@ class _ExpeditionCardWidgetState extends State<ExpeditionCardWidget> {
           style: Theme.of(context)
               .textTheme
               .bodySmall
-              ?.copyWith(fontSize: 6.sp, color: AppColors.textWhiteColor),
+              ?.copyWith(fontSize: 10.sp, color: AppColors.textWhiteColor),
         ),
       ],
     );

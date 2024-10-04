@@ -93,18 +93,12 @@ class Page1 extends ConsumerWidget {
             width: double.infinity,
             child: CachedNetworkImage(
               imageUrl: expeditionDetail.image ?? AppImages.defaultImage,
-              // imageBuilder: (context, imageProvider) => Container(
-              //   decoration: BoxDecoration(
-              //     image: DecorationImage(
-              //       image: imageProvider,
-              //       fit: BoxFit.cover,
-              //       colorFilter: const ColorFilter.mode(
-              //         Colors.red,
-              //         BlendMode.colorBurn,
-              //       ),
-              //     ),
-              //   ),
-              // ),
+              imageBuilder: (context, imageProvider) => Container(
+                decoration: BoxDecoration(
+                  image:
+                      DecorationImage(image: imageProvider, fit: BoxFit.cover),
+                ),
+              ),
               placeholder: (context, url) => Image.asset(
                 AppImages.defaultImage,
                 fit: BoxFit.cover,
@@ -120,14 +114,14 @@ class Page1 extends ConsumerWidget {
             ),
           ),
           Positioned(
-            top: 20,
+            top: 30,
             left: context.w * 0.5,
             child: Text(
               expeditionName,
               style: Theme.of(context)
                   .textTheme
-                  .titleLarge
-                  ?.copyWith(fontSize: 16.sp, color: AppColors.textWhiteColor),
+                  .titleMedium
+                  ?.copyWith(color: AppColors.textWhiteColor),
             ),
           ),
           Positioned(
@@ -149,10 +143,10 @@ class Page1 extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(expeditionDetail.text,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineLarge
-                          ?.copyWith(color: AppColors.textWhiteColor)),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge
+                              ?.copyWith(color: AppColors.textWhiteColor)),
                   AppSizes.largeY,
                   Text(
                     expeditionDetail.description,
@@ -192,7 +186,7 @@ class Page1 extends ConsumerWidget {
                             .read(quizSessionNotifierProvider.notifier)
                             .createQuizSession(quizSession, context);
 
-                        context.push(QuizDetailScreen(
+                        context.pushReplacement(QuizDetailScreen(
                             quizSessionId: quizSession.id,
                             quiz: value,
                             expeditionId: expeditionId));

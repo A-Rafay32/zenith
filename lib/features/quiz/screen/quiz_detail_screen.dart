@@ -10,6 +10,7 @@ import 'package:zenith/core/extensions/routes_extenstion.dart';
 import 'package:zenith/core/extensions/sizes_extensions.dart';
 import 'package:zenith/core/utils/gen_random_ids.dart';
 import 'package:zenith/core/utils/loader.dart';
+import 'package:zenith/features/auth/screens/widgets/app_bar_white.dart';
 import 'package:zenith/features/auth/screens/widgets/button.dart';
 import 'package:zenith/features/expedition/model/expedtion_detail.dart';
 import 'package:zenith/features/expedition/providers/provider.dart';
@@ -59,14 +60,14 @@ class QuizDetailScreen extends ConsumerWidget {
                   ));
 
           return Scaffold(
-            // appBar: PreferredSize(
-            //   preferredSize: const Size.fromHeight(65),
-            //   child: CustomAppBar(
-            //     enableBackButton: false,
-            //     onPressed: () {},
-            //     text: quizName,
-            //   ),
-            // ),
+            appBar: PreferredSize(
+              preferredSize: const Size.fromHeight(65),
+              child: CustomAppBar(
+                enableBackButton: false,
+                onPressed: () {},
+                text: "",
+              ),
+            ),
             body: PageView(children: pages),
           );
         },
