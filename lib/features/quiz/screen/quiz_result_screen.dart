@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zenith/app/themes/app_colors.dart';
 import 'package:zenith/core/extensions/routes_extenstion.dart';
 import 'package:zenith/features/auth/screens/widgets/app_bar_white.dart';
@@ -48,7 +49,7 @@ class QuizResultScreen extends StatelessWidget {
             // Message whether passed or failed
             Text(
               isPassed ? 'Congratulations! You Passed!' : 'Sorry, You Failed!',
-              style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: isPassed ? Colors.green : Colors.red),
               textAlign: TextAlign.center,
@@ -57,10 +58,8 @@ class QuizResultScreen extends StatelessWidget {
 
             // Final score
             Text('$score / $totalQuestions',
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineLarge
-                    ?.copyWith(color: AppColors.textWhiteColor)),
+                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                    fontSize: 28.sp, color: AppColors.textWhiteColor)),
 
             const SizedBox(height: 20),
 

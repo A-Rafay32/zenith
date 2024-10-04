@@ -3,14 +3,13 @@ import 'package:zenith/app/constants/api_urls.dart';
 import 'package:zenith/core/services/http_service.dart';
 import 'package:zenith/features/home/model/space_articles_model.dart';
 
-final articlesProvider = FutureProvider.autoDispose((ref) async {
+final articlesProvider = FutureProvider((ref) async {
   final response = await HttpService(baseUrl: BASEURL).get(APIUrls.getArticles);
   print(response);
   return SpaceArticlesResponse.fromJson(response as Map<String, dynamic>);
 });
 
-final articleProviderById =
-    FutureProvider.autoDispose.family((ref, int id) async {
+final articleProviderById = FutureProvider.family((ref, int id) async {
   final response =
       await HttpService(baseUrl: BASEURL).get(APIUrls.getArticleById(id));
   print(response);

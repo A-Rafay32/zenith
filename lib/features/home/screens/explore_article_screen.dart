@@ -6,10 +6,12 @@ import 'package:zenith/app/constants/app_images.dart';
 import 'package:zenith/app/themes/app_colors.dart';
 import 'package:zenith/app/themes/app_paddings.dart';
 import 'package:zenith/app/themes/app_text_field_themes.dart';
+import 'package:zenith/core/extensions/routes_extenstion.dart';
 import 'package:zenith/core/extensions/sizes_extensions.dart';
 import 'package:zenith/core/extensions/text_theme_ext.dart';
 import 'package:zenith/core/utils/loader.dart';
 import 'package:zenith/features/home/providers/articles_provider.dart';
+import 'package:zenith/features/home/screens/article_detail_screen.dart';
 
 class ExploreArticlesScreen extends ConsumerWidget {
   const ExploreArticlesScreen({super.key});
@@ -50,46 +52,54 @@ class ExploreArticlesScreen extends ConsumerWidget {
                 //     childAspectRatio: 0.9.sp,
                 //     crossAxisSpacing: 15,
                 //     crossAxisCount: 3),
-                itemBuilder: (context, index) => SizedBox(
-                  width: context.w * 0.9,
-                  height: context.h * 0.15,
-                  child: Row(
-                    children: [
-                      ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: CachedNetworkImage(
-                            imageUrl: data.results[index].imageUrl,
-                            fit: BoxFit.cover,
-                            height: 90.h,
-                            width: 90.w,
-                          )),
-                      AppSizes.tinyX,
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: context.w * 0.65,
-                            child: Text(
-                              data.results[index].title,
-                              overflow: TextOverflow.ellipsis,
-                              style: context.textTheme.bodyMedium
-                                  ?.copyWith(fontWeight: FontWeight.w700),
+                itemBuilder: (context, index) => GestureDetector(
+                  onTap: () {
+                    context.push(
+                        ArticleDetailScreen(article: data.results[index]));
+                  },
+                  child: SizedBox(
+                    width: context.w * 0.9,
+                    height: context.h * 0.15,
+                    child: Row(
+                      children: [
+                        ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: CachedNetworkImage(
+                              imageUrl: data.results[index].imageUrl,
+                              fit: BoxFit.cover,
+                              height: 90.h,
+                              width: 90.w,
+                            )),
+                        AppSizes.tinyX,
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: context.w * 0.65,
+                              child: Text(
+                                data.results[index].title,
+                                overflow: TextOverflow.ellipsis,
+                                style: context.textTheme.bodyMedium
+                                    ?.copyWith(fontWeight: FontWeight.w700),
+                              ),
                             ),
-                          ),
-                          AppSizes.tinyY,
-                          SizedBox(
-                            width: context.w * 0.65,
-                            child: Text(
-                              data.results[index].summary,
-                              maxLines: 4,
-                              overflow: TextOverflow.ellipsis,
-                              style: context.textTheme.bodySmall?.copyWith(
-                                  fontSize: 8.sp, fontWeight: FontWeight.w700),
+                            AppSizes.tinyY,
+                            SizedBox(
+                              width: context.w * 0.65,
+                              child: Text(
+                                data.results[index].summary,
+                                maxLines: 4,
+                                overflow: TextOverflow.ellipsis,
+                                style: context.textTheme.bodySmall?.copyWith(
+                                    fontSize: 8.sp,
+                                    fontWeight: FontWeight.w700),
+                              ),
                             ),
-                          ),
-                        ],
-                      )
-                    ],
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
