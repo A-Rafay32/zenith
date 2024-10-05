@@ -13,6 +13,7 @@ import 'package:zenith/features/home/providers/home_state_provider.dart';
 import 'package:zenith/features/expedition/screen/add_expedition_screen.dart';
 import 'package:zenith/features/home/screens/buyer_profile_screen.dart';
 import 'package:zenith/features/home/screens/explore_article_screen.dart';
+import 'package:zenith/features/home/screens/explore_exoplanets_screen.dart';
 import 'package:zenith/features/stars/stars_screen.dart';
 import 'package:zenith/features/home/screens/widgets/app_bars.dart';
 import 'package:zenith/features/home/screens/widgets/custom_navigation_bar.dart';
@@ -28,7 +29,7 @@ class HomeScreen extends ConsumerWidget {
   final List<Widget> screens = [
     const HomeScreenWidget(),
     const ExploreArticlesScreen(),
-    // const FavouriteScreen(),
+    const ExploreExoplanetsScreen(),
     ConstellationsListDemo(),
     const BuyerProfileScreen(),
   ];

@@ -4,14 +4,15 @@ import 'package:zenith/core/services/http_service.dart';
 import 'package:zenith/features/home/model/space_articles_model.dart';
 
 final articlesProvider = FutureProvider((ref) async {
-  final response = await HttpService(baseUrl: BASEURL).get(APIUrls.getArticles);
+  final response =
+      await HttpService(baseUrl: BASEURL_ARTICLE).get(APIUrls.getArticles);
   print(response);
   return SpaceArticlesResponse.fromJson(response as Map<String, dynamic>);
 });
 
 final articleProviderById = FutureProvider.family((ref, int id) async {
-  final response =
-      await HttpService(baseUrl: BASEURL).get(APIUrls.getArticleById(id));
+  final response = await HttpService(baseUrl: BASEURL_ARTICLE)
+      .get(APIUrls.getArticleById(id));
   print(response);
   return Article.fromJson(response as Map<String, dynamic>);
 });

@@ -13,9 +13,16 @@ class CustomNavigationBar extends ConsumerWidget {
 
   final double w;
 
-  List<String> navs = ["Home", "Explore", "Track", "You"];
+  List<String> navs = [
+    "Home",
+    "Explore",
+    "Exoplanets",
+    "Constellations",
+    "You"
+  ];
   List<String> navSvgs = [
     AppSvgs.home,
+    AppSvgs.search,
     AppSvgs.search,
     // AppSvgs.favourites,
     AppSvgs.inbox,

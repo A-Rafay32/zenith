@@ -118,47 +118,48 @@ class _QuizPageState extends ConsumerState<QuizPage> {
       child: Stack(
         children: [
           Image.asset(
-            AppImages.defaultImage,
+            AppImages.splashImage2,
             fit: BoxFit.cover,
             height: double.infinity,
             width: double.infinity,
           ),
-          // Positioned(
-          //   top: 20,
-          //   left: context.w * 0.5,
-          //   child: Text(
-          //     quizName,
-          //     style: Theme.of(context)
-          //         .textTheme
-          //         .titleLarge
-          //         ?.copyWith(fontSize: 16.sp, color: AppColors.textWhiteColor),
-          //   ),
-          // ),
-
-          Positioned(
-            top: context.h * 0.4,
-            child: Container(
-              height: context.h * 0.6,
-              width: context.w,
-              padding: AppPaddings.normal,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Question ${widget.index + 1}",
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          fontSize: 21.sp,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.textWhiteColor)),
-                  AppSizes.normalY,
-                  Text(widget.question.questionText,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium
-                          ?.copyWith(color: AppColors.textWhiteColor)),
-                  AppSizes.largeY,
-                  ...List.generate(
-                    widget.question.options.length,
-                    (index) => Row(
+          Padding(
+            padding: AppPaddings.normal,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Image.asset(
+                //   AppImages.defaultImage,
+                //   fit: BoxFit.cover,
+                //   height: double.infinity,
+                //   width: double.infinity,
+                // ),
+                AppSizes.largeY,
+                AppSizes.largeY,
+                AppSizes.largeY,
+                AppSizes.largeY,
+                AppSizes.largeY,
+                Text("Question ${widget.index + 1}",
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.textWhiteColor.withOpacity(0.3))),
+                AppSizes.normalY,
+                Text(widget.question.questionText,
+                    maxLines: 3,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        fontSize: 25.sp,
+                        color: AppColors.textWhiteColor.withOpacity(0.6))),
+                AppSizes.largeY,
+                ...List.generate(
+                  widget.question.options.length,
+                  (index) => Container(
+                    padding: AppPaddings.normal,
+                    margin: EdgeInsets.symmetric(vertical: 10.w),
+                    decoration: BoxDecoration(
+                        color: AppColors.blackshadowColor,
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Row(
                       children: [
                         Checkbox(
                             value: userAnswers[index],
@@ -186,17 +187,22 @@ class _QuizPageState extends ConsumerState<QuizPage> {
                         AppSizes.smallX,
                         Text(
                           widget.question.options[index],
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(
                                   // fontSize: 6.sp,
-                                  color: AppColors.textWhiteColor),
+                                  color: AppColors.textWhiteColor
+                                      .withOpacity(0.6)),
                         ),
                       ],
                     ),
                   ),
-                  const Spacer(),
-                  if (widget.isLastPage)
-                    Button(
+                ),
+                const Spacer(),
+                if (widget.isLastPage)
+                  Center(
+                    child: Button(
                         press: () async {
                           await ref
                               .read(quizSessionNotifierProvider.notifier)
@@ -224,20 +230,22 @@ class _QuizPageState extends ConsumerState<QuizPage> {
                                 adminId: userQuiz.userId,
                                 context: context);
 
-                            context.pushReplacement(QuizResultScreen(
-                                isPassed: true,
-                                score: 7,
-                                totalQuestions: 10,
-                                attemptCount: 1,
-                                startTime: DateTime.now(),
-                                endTime: DateTime.now()));
+                            showDialog(
+                                context: context,
+                                builder: (context) => QuizResultScreen(
+                                    isPassed: true,
+                                    score: 7,
+                                    totalQuestions: 10,
+                                    attemptCount: 1,
+                                    startTime: DateTime.now(),
+                                    endTime: DateTime.now()));
                           });
                         },
-                        text: "Submit")
-                ],
-              ),
+                        text: "Submit"),
+                  )
+              ],
             ),
-          )
+          ),
         ],
       ),
     );

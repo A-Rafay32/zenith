@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zenith/app/themes/app_colors.dart';
 import 'package:zenith/core/extensions/routes_extenstion.dart';
+import 'package:zenith/core/extensions/sizes_extensions.dart';
 import 'package:zenith/features/auth/screens/widgets/app_bar_white.dart';
 import 'package:zenith/features/auth/screens/widgets/button.dart';
 
@@ -32,18 +33,23 @@ class QuizResultScreen extends StatelessWidget {
     final formattedEndTime =
         "${endTime.hour}:${endTime.minute}:${endTime.second}";
 
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(64),
-        child: CustomAppBar(
-          enableBackButton: false,
-          onPressed: () {},
-          text: "Quiz Result",
-        ),
-      ),
-      body: Padding(
+    return AlertDialog(
+      // appBar: PreferredSize(
+      //   preferredSize: const Size.fromHeight(64),
+      //   child: CustomAppBar(
+      //     enableBackButton: false,
+      //     onPressed: () {},
+      //     text: "Quiz Result",
+      //   ),
+      // ),
+      backgroundColor: AppColors.blackshadowColor,
+
+      content: Container(
+        // height: context.h * 0.5,
+        width: context.w * 0.8,
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // Message whether passed or failed
@@ -96,7 +102,12 @@ class QuizResultScreen extends StatelessWidget {
 
             const Spacer(),
 
-            Button(press: () => context.pop(), text: "Return to Home"),
+            Button(
+                press: () {
+                  context.pop();
+                  context.pop();
+                },
+                text: "Return to Home"),
           ],
         ),
       ),

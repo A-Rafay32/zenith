@@ -12,7 +12,7 @@ class HttpService {
   final Duration timeout;
 
   HttpService({
-    this.baseUrl = BASEURL,
+    this.baseUrl = BASEURL_ARTICLE,
     this.timeout = const Duration(seconds: 15),
   });
   Future<dynamic> get(String path) async {

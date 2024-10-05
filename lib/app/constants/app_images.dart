@@ -1,9 +1,11 @@
 class AppImages {
   static const splashImage = "assets/images/splash4.jpg";
   static const defaultImage = "assets/space/asset1.jpg";
+  static const splashImage2 = "assets/space/splash_image.jpg";
+  static const authImage = "assets/space/auth_image.jpg";
   static List<String> spaceImages = [
     "assets/space/asset1.jpg",
-  ];  
+  ];
 }
 
 class AppSvgs {

@@ -7,12 +7,17 @@ final List<Widget> appBars = [
   CustomAppBar(
     enableBackButton: false,
     onPressed: () {},
-    text: "Explore Space",
+    text: "Explore Articles",
   ),
   CustomAppBar(
     enableBackButton: false,
     onPressed: () {},
-    text: "Track",
+    text: "Explore ExoPlanets",
+  ),
+  CustomAppBar(
+    enableBackButton: false,
+    onPressed: () {},
+    text: "Constellations",
   ),
   CustomAppBar(
     enableBackButton: false,

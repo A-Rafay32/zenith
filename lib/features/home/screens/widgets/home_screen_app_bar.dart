@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:zenith/app/constants/firebase_constants.dart';
 import 'package:zenith/app/themes/app_colors.dart';
 import 'package:zenith/core/extensions/routes_extenstion.dart';
+import 'package:zenith/features/auth/providers/auth_providers.dart';
 import 'package:zenith/features/home/screens/notification_screen.dart';
 
 class HomeScreenAppBar extends ConsumerWidget {
@@ -28,14 +30,14 @@ class HomeScreenAppBar extends ConsumerWidget {
       title: Column(
         children: [
           Text(
-            "Hi, userName",
+            ref.watch(currentUserProvider)?.displayName.toString() ?? "",
             style:
                 Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 20),
           ),
-          Text(
-            "London, UK",
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(),
-          ),
+          // Text(
+          //   "London, UK",
+          //   style: Theme.of(context).textTheme.titleSmall?.copyWith(),
+          // ),
         ],
       ),
       actions: [
