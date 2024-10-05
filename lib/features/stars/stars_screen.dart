@@ -15,13 +15,13 @@ import 'package:zenith/features/home/screens/widgets/inbox_tap_bar.dart';
 // import 'package:zenith/features/offer/providers/offer_provider.dart';
 // import 'package:zenith/features/offer/screens/offer_detailed_screen.dart';
 
-class InboxScreen extends ConsumerStatefulWidget {
-  const InboxScreen({super.key});
+class StarsScreen extends ConsumerStatefulWidget {
+  const StarsScreen({super.key});
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _InboxScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _StarsScreenState();
 }
 
-class _InboxScreenState extends ConsumerState<InboxScreen> {
+class _StarsScreenState extends ConsumerState<StarsScreen> {
   int selectedTabIndex = 0;
   bool isInboxEmpty = false;
   List<String> tabs = ["Your Offers", "Offers for you"];

@@ -89,6 +89,7 @@ flutter:
     - assets/space/
     - assets/svgs/
     - assets/svgs/profile/
+    - images/
 
   fonts:
     - family: DMSerif
