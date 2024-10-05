@@ -31,13 +31,13 @@ class CustomNavigationBar extends ConsumerWidget {
       height: 65,
       width: w * 0.8,
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-              offset: const Offset(0, 10),
-              blurRadius: 35,
-              color: Colors.black.withOpacity(0.32))
+        boxShadow: const [
+          // BoxShadow(
+          //     offset: const Offset(0, 10),
+          //     blurRadius: 35,
+          //     color: AppColors.secondaryColor.withOpacity(0.32))
         ],
-        color: Colors.black,
+        color: AppColors.secondaryColor.withOpacity(0.6),
         borderRadius: BorderRadius.circular(30),
       ),
       child: Row(
@@ -93,8 +93,8 @@ class BottomNavBarItem extends StatelessWidget {
                     width: 17,
                     colorFilter: ColorFilter.mode(
                         isTagSelected
-                            ? AppColors.secondaryColor
-                            : AppColors.backgroundColor,
+                            ? AppColors.textWhiteColor
+                            : AppColors.textWhiteColor.withOpacity(0.3),
                         BlendMode.srcIn),
                   ),
             const SizedBox(
@@ -104,8 +104,8 @@ class BottomNavBarItem extends StatelessWidget {
               text,
               style: Theme.of(context).textTheme.labelSmall?.copyWith(
                     color: isTagSelected
-                        ? AppColors.secondaryColor
-                        : AppColors.backgroundColor,
+                        ? AppColors.textWhiteColor
+                        : AppColors.textWhiteColor.withOpacity(0.3),
                   ),
             ),
           ],

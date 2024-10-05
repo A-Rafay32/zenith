@@ -3,8 +3,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color primaryColor = Color.fromARGB(255, 53, 55, 75);
-  static const Color secondaryColor = Color.fromARGB(255, 120, 160, 131);
+  // static const Color primaryColor = Color.fromARGB(255, 53, 55, 75);
+  // static const Color secondaryColor = Color.fromARGB(255, 120, 160, 131);
+  static const Color primaryColor = Colors.black;
+  static const Color secondaryColor = Color.fromRGBO(56, 142, 60, 1);
   static const Color tertiaryColor = Color.fromARGB(255, 52, 73, 85);
   static LinearGradient linearGradient = const LinearGradient(colors: [
     Color.fromARGB(255, 120, 160, 131),
@@ -15,7 +17,8 @@ class AppColors {
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter);
 
-  static const Color backgroundColor = Color.fromARGB(255, 53, 55, 75);
+  // static const Color backgroundColor = Color.fromARGB(255, 53, 55, 75);
+  static const Color backgroundColor = Colors.black;
   static const Color blackshadowColor = Color.fromARGB(255, 42, 41, 41);
   // static Color sellColor = const Color.fromARGB(255, 7, 189, 116);
   // static Color rentColor = const Color.fromARGB(255, 36, 107, 253);

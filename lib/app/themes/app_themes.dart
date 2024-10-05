@@ -91,7 +91,7 @@ class AppThemes {
       style: ButtonStyle(
     shape: MaterialStatePropertyAll(
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
-    backgroundColor: const MaterialStatePropertyAll(AppColors.primaryColor),
+    backgroundColor: const MaterialStatePropertyAll(AppColors.secondaryColor),
     elevation: const MaterialStatePropertyAll(2.0),
     textStyle: MaterialStatePropertyAll(AppTextTheme.bodyMedium),
   ));

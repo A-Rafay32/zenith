@@ -44,7 +44,7 @@ class ExploreArticlesScreen extends ConsumerWidget {
             ),
             AppSizes.largeY,
             SizedBox(
-              height: context.h * 0.9,
+              height: context.h * 0.7,
               width: double.infinity,
               child: ListView.builder(
                 itemCount: data.results.length,
@@ -57,9 +57,15 @@ class ExploreArticlesScreen extends ConsumerWidget {
                     context.push(
                         ArticleDetailScreen(article: data.results[index]));
                   },
-                  child: SizedBox(
+                  child: Container(
                     width: context.w * 0.9,
-                    height: context.h * 0.15,
+                    height: context.h * 0.1,
+                    margin: AppPaddings.tinyY,
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+                    decoration: BoxDecoration(
+                        color: AppColors.blackshadowColor,
+                        borderRadius: BorderRadius.circular(15)),
                     child: Row(
                       children: [
                         ClipRRect(
@@ -76,7 +82,7 @@ class ExploreArticlesScreen extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
-                              width: context.w * 0.65,
+                              width: context.w * 0.6,
                               child: Text(
                                 data.results[index].title,
                                 overflow: TextOverflow.ellipsis,
@@ -86,7 +92,7 @@ class ExploreArticlesScreen extends ConsumerWidget {
                             ),
                             AppSizes.tinyY,
                             SizedBox(
-                              width: context.w * 0.65,
+                              width: context.w * 0.6,
                               child: Text(
                                 data.results[index].summary,
                                 maxLines: 4,

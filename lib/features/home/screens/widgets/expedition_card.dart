@@ -6,6 +6,7 @@ import 'package:zenith/app/themes/app_styles.dart';
 import 'package:zenith/app/themes/app_colors.dart';
 import 'package:zenith/app/themes/app_paddings.dart';
 import 'package:zenith/core/extensions/routes_extenstion.dart';
+import 'package:zenith/core/extensions/sizes_extensions.dart';
 import 'package:zenith/features/expedition/screen/expedition_detail_screen.dart';
 import 'package:zenith/features/home/screens/widgets/house_image_view.dart';
 
@@ -52,6 +53,7 @@ class _ExpeditionCardWidgetState extends State<ExpeditionCardWidget> {
               CachedNetworkImage(
                   imageUrl: widget.image.toString(),
                   width: 300.w,
+                  height: context.h * 0.35,
                   imageBuilder: (context, imageProvider) => Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
@@ -81,7 +83,11 @@ class _ExpeditionCardWidgetState extends State<ExpeditionCardWidget> {
               //   context: context,
               // ),
               AppSizes.smallY,
-              Positioned(bottom: 10, left: 5, child: productDetails(context)),
+              Positioned(
+                  bottom: 20,
+                  left: 10,
+                  right: 10,
+                  child: productDetails(context)),
             ],
           )),
     );
@@ -94,7 +100,7 @@ class _ExpeditionCardWidgetState extends State<ExpeditionCardWidget> {
       children: [
         Text(
           widget.name.toString(),
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+          style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                 color: AppColors.textWhiteColor,
               ),
         ),

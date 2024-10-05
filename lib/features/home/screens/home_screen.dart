@@ -122,14 +122,14 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
                     ),
                     AppSizes.normalY,
                     SizedBox(
-                      height: context.h * 0.25,
+                      height: context.h * 0.35,
                       child: GridView.builder(
                         scrollDirection: Axis.horizontal,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 1,
-                            childAspectRatio: 0.6,
+                            childAspectRatio: 1.0,
                             mainAxisSpacing: 10.h,
-                            crossAxisSpacing: 10.w),
+                            crossAxisSpacing: 5.w),
                         itemCount: data.length,
                         itemBuilder: (context, index) => ExpeditionCardWidget(
                             id: data[index].id,

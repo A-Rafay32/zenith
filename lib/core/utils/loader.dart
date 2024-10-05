@@ -12,7 +12,7 @@ class ButtonLoader extends StatelessWidget {
       width: 22,
       margin: AppPaddings.smallX,
       child: const CircularProgressIndicator(
-        color: AppColors.secondaryColor,
+        color: AppColors.primaryColor,
       ),
     );
   }
