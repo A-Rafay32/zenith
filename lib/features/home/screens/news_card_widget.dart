@@ -12,8 +12,8 @@ import 'package:zenith/features/auth/providers/user_notifier.dart';
 import 'package:zenith/features/expedition/screen/expedition_detail_screen.dart';
 import 'package:zenith/features/home/screens/widgets/house_image_view.dart';
 
-class ExpeditionCardWidget extends ConsumerStatefulWidget {
-  const ExpeditionCardWidget({
+class NewsCardWidget extends ConsumerStatefulWidget {
+  const NewsCardWidget({
     super.key,
     required this.image,
     required this.description,
@@ -29,11 +29,10 @@ class ExpeditionCardWidget extends ConsumerStatefulWidget {
   final String image;
 
   @override
-  ConsumerState<ExpeditionCardWidget> createState() =>
-      _ExpeditionCardWidgetState();
+  ConsumerState<NewsCardWidget> createState() => _NewsCardWidgetState();
 }
 
-class _ExpeditionCardWidgetState extends ConsumerState<ExpeditionCardWidget> {
+class _NewsCardWidgetState extends ConsumerState<NewsCardWidget> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context, designSize: const Size(428, 926));
@@ -55,13 +54,13 @@ class _ExpeditionCardWidgetState extends ConsumerState<ExpeditionCardWidget> {
             color: AppColors.primaryColor,
             borderRadius: BorderRadius.circular(20),
           ),
-          child: Stack(
+          child: Column(
             // mainAxisSize: MainAxisSize.min,
             children: [
               CachedNetworkImage(
                   imageUrl: widget.image.toString(),
-                  width: 300.w,
-                  height: context.h * 0.35,
+                  width: 200.w,
+                  height: context.h * 0.13,
                   imageBuilder: (context, imageProvider) => Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
@@ -79,23 +78,19 @@ class _ExpeditionCardWidgetState extends ConsumerState<ExpeditionCardWidget> {
                         borderRadius: BorderRadius.circular(15),
                         child: Image.asset(
                           AppImages.defaultImage,
-                          width: 300.w,
+                          width: 200.w,
                           fit: BoxFit.cover,
                         ),
                       )),
 
               // HouseImageView(
-              //   width: 300.w,
+              //   width: 200.w,
               //   isPremium: true,
               //   productImage: widget.image,
               //   context: context,
               // ),
               AppSizes.smallY,
-              Positioned(
-                  bottom: 20,
-                  left: 10,
-                  right: 10,
-                  child: productDetails(context)),
+              productDetails(context),
             ],
           )),
     );
@@ -108,23 +103,25 @@ class _ExpeditionCardWidgetState extends ConsumerState<ExpeditionCardWidget> {
       children: [
         Text(
           widget.name.toString(),
-          style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.titleSmall?.copyWith(
                 color: AppColors.textWhiteColor,
               ),
         ),
-        AppSizes.tinyY,
-        SizedBox(
-          width: 300.w,
-          child: Text(
-            widget.description,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context)
-                .textTheme
-                .bodySmall
-                ?.copyWith(fontSize: 10.sp, color: AppColors.textWhiteColor),
-          ),
-        ),
+        // AppSizes.tinyY,
+        // SizedBox(
+        //   width: 200.w,
+        //   child: Text(
+        //     widget.description,
+        //     maxLines: 2,
+        //     overflow: TextOverflow.ellipsis,
+        //     style: Theme.of(context)
+        //         .textTheme
+        //         .bodySmall
+        //         ?.copyWith(fontSize: 10.sp, color: AppColors.textWhiteColor),
+        //   ),
+        // ),
       ],
     );
   }

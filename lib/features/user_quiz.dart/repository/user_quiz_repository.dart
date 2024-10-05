@@ -130,6 +130,32 @@ class UserQuizRepository {
     }
   }
 
+  Stream<List<UserQuiz>> getAllUserQuizesByUserId(String userId) {
+    try {
+      // Fetch quizzes where 'userId' matches the provided userId
+      return userQuizCollection
+          .where('userId', isEqualTo: userId)
+          .snapshots()
+          .map((querySnapshot) {
+        // Print each document data for debugging
+        for (var documentSnapshot in querySnapshot.docs) {
+          print(documentSnapshot.data());
+        }
+
+        // Map Firestore documents to UserQuiz model
+        return querySnapshot.docs
+            .map(
+                (documentSnapshot) => UserQuiz.fromMap(documentSnapshot.data()))
+            .toList();
+      });
+    } on FirebaseException catch (e) {
+      throw e.message.toString();
+    } catch (e, stackTrace) {
+      debugPrint("error : ${e.toString()} \n stackTrace : $stackTrace");
+      rethrow;
+    }
+  }
+
   // Stream<List<UserQuiz>> getAllRentalHouse() {
   //   try {
   //     return expeditionCollection

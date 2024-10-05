@@ -17,6 +17,7 @@ class Question {
   final QuestionType questionType;
   final List<String> options;
   final int marks;
+  final int order;
 
   Question({
     required this.id,
@@ -25,6 +26,7 @@ class Question {
     required this.correctAnswer,
     required this.options,
     this.marks = 1,
+    this.order = 1,
   });
 
   Map<String, dynamic> toMap() {
@@ -35,6 +37,7 @@ class Question {
       'questionType': questionType.name.toString(),
       'options': options,
       'marks': marks,
+      'order': order,
     };
   }
 
@@ -44,6 +47,7 @@ class Question {
       questionText: map['questionText'] ?? '',
       correctAnswer: map['correctAnswer'] ?? '',
       marks: map['marks'] ?? '',
+      order: map['order'] ?? 1,
       questionType: QuestionType.toQuestionType(map['questionType']),
       options: List<String>.from(map['options']),
     );

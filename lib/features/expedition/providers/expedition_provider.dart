@@ -20,3 +20,8 @@ final expeditionDetailStreamProvider =
   final repository = ref.watch(expeditionDetailRepositoryProvider);
   return repository.getAllExpeditionDetails(expeditionId);
 });
+
+final getExpeditionsByIds = StreamProvider((ref) async* {
+  final repository = ref.watch(expeditionRepositoryProvider);
+  yield* await repository.getAllExpeditionsByIds();
+});

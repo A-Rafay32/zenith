@@ -36,8 +36,10 @@ final currentUserProvider = Provider<User?>((ref) {
   return FirebaseAuth.instance.currentUser;
 });
 
-final currentUserDocProvider = Provider((ref) =>
-    ref.read(userRepositoryProvider).getUserByEmail(currentUser?.email ?? ""));
+final currentUserDocProvider = FutureProvider((ref) async {
+  return await ref.read(userRepositoryProvider).getUserByEmail(currentUser?.email ?? "");
+});
+
 
 final userRepositoryProvider = Provider((ref) => UserRepository());
 

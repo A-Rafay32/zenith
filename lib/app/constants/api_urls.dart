@@ -8,7 +8,5 @@ class APIUrls {
     return "/v4/articles/$id";
   }
 
-  static String getExoplanets() {
-    return "/search?q=exoplanet&media_type=image";
-  }
+  static String getExoplanets = "/search?q=exoplanet&media_type=image";
 }

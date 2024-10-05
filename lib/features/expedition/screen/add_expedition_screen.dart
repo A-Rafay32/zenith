@@ -115,7 +115,7 @@ class _AddRentalHomeScreenState extends ConsumerState<AddExpeditionScreen> {
                 // ),
 
                 Button(
-                    isLoading: ref.watch(expeditionDetailNotifier).isLoading,
+                    isLoading: ref.watch(expeditionNotifier).isLoading,
                     press: () => addExpedition(ref, context),
                     text: "Add Expedition"),
                 AppSizes.largeY,
@@ -129,6 +129,11 @@ class _AddRentalHomeScreenState extends ConsumerState<AddExpeditionScreen> {
                     press: () => addQuestions(ref, context),
                     text: "Add Questions"),
                 AppSizes.largeY,
+                Button(
+                    isLoading: ref.watch(expeditionDetailNotifier).isLoading,
+                    press: () => addEDS(ref, context),
+                    text: "Add EDS"),
+                AppSizes.largeY,
               ],
             ),
           )),
@@ -138,8 +143,9 @@ class _AddRentalHomeScreenState extends ConsumerState<AddExpeditionScreen> {
   void addQuiz(WidgetRef ref, BuildContext context) async {
     String? ownerId = ref.read(currentUserProvider)?.uid;
     Quiz q = Quiz(
+        quizName: "Kepler 22-b",
         id: generateId(),
-        expeditionId: "4ca94538-32d6-4a71-a0c7-5d5c3d1ba4d6",
+        expeditionId: "53e3ffa4-a583-45cc-881e-9ddd5d684f17",
         correctAnswers: [],
         passingCriteria: 5);
 
@@ -156,60 +162,86 @@ class _AddRentalHomeScreenState extends ConsumerState<AddExpeditionScreen> {
 
     List<Question> qList = [
       Question(
-          id: generateId(),
-          questionText:
-              "Stars are giant balls of hot gas – mostly hydrogen, with some helium and small amounts of other elements.",
-          questionType: QuestionType.trueFalse,
-          options: ["True", "False"],
-          correctAnswer: "True"),
+        id: generateId(),
+        questionText:
+            "Kepler-22b is located approximately how many light-years away from Earth?",
+        questionType: QuestionType.singleChoice,
+        options: ["500", "600", "700", "800"],
+        correctAnswer: "600",
+      ),
       Question(
-          id: generateId(),
-          questionText: "Stars form in large clouds of gas and dust called ?",
-          questionType: QuestionType.singleChoice,
-          options: ["Molecular Cloud", "Dust Clouds", "Gas Clouds"],
-          correctAnswer: "Molecular Clouds"),
+        id: generateId(),
+        questionText:
+            "Kepler-22b orbits around a star that is classified as a G-type star, much like our Sun.",
+        questionType: QuestionType.trueFalse,
+        options: ["True", "False"],
+        correctAnswer: "True",
+      ),
       Question(
-          id: generateId(),
-          questionText:
-              "Batches of stars that have recently formed from molecular clouds are often called stellar clusters.",
-          questionType: QuestionType.trueFalse,
-          options: ["True", "False"],
-          correctAnswer: "True"),
+        id: generateId(),
+        questionText:
+            "The size of Kepler-22b is approximately how many times the size of Earth?",
+        questionType: QuestionType.singleChoice,
+        options: ["2.4", "3.0", "1.5", "4.0"],
+        correctAnswer: "2.4",
+      ),
       Question(
-          id: generateId(),
-          questionText:
-              "Nuclear fission releases energy, which heats the star and prevents it from further collapsing under the force of gravity.",
-          questionType: QuestionType.trueFalse,
-          options: ["True", "False"],
-          correctAnswer: "False"),
+        id: generateId(),
+        questionText:
+            "Kepler-22b orbits its star in approximately 290 Earth days.",
+        questionType: QuestionType.trueFalse,
+        options: ["True", "False"],
+        correctAnswer: "True",
+      ),
       Question(
-          id: generateId(),
-          questionText:
-              "More massive stars must burn fuel at a higher rate to generate the energy that keeps them from collapsing under their own weight",
-          questionType: QuestionType.trueFalse,
-          options: ["True", "False"],
-          correctAnswer: "True"),
+        id: generateId(),
+        questionText:
+            "Which term describes the region where Kepler-22b is located, where conditions may allow liquid water to exist?",
+        questionType: QuestionType.singleChoice,
+        options: [
+          "Goldilocks Zone",
+          "Oort Cloud",
+          "Kuiper Belt",
+          "Asteroid Belt"
+        ],
+        correctAnswer: "Goldilocks Zone",
+      ),
       Question(
-          id: generateId(),
-          questionText:
-              "A low-mass star’s atmosphere will keep expanding until it becomes a subgiant or giant star while fusion converts ? into carbon in the core",
-          questionType: QuestionType.singleChoice,
-          options: ["Helium", "Carbon", "Nitrogen", "Hydrogen"],
-          correctAnswer: "Helium"),
+        id: generateId(),
+        questionText:
+            "Kepler-22b was the first planet discovered in the habitable zone of a Sun-like star.",
+        questionType: QuestionType.trueFalse,
+        options: ["True", "False"],
+        correctAnswer: "True",
+      ),
       Question(
-          id: generateId(),
-          questionText:
-              "Stars are giant balls of hot gas – mostly hydrogen, with some helium and small amounts of other elements.",
-          questionType: QuestionType.trueFalse,
-          options: ["True", "False"],
-          correctAnswer: "True"),
+        id: generateId(),
+        questionText: "What type of telescope was used to discover Kepler-22b?",
+        questionType: QuestionType.singleChoice,
+        options: [
+          "James Webb Space Telescope",
+          "Hubble Space Telescope",
+          "Kepler Space Telescope",
+          "Spitzer Space Telescope"
+        ],
+        correctAnswer: "Kepler Space Telescope",
+      ),
       Question(
-          id: generateId(),
-          questionText:
-              "The star’s iron core collapses until forces between the nuclei push the brakes, then it rebounds. The result is a huge explosion called a ?",
-          questionType: QuestionType.singleChoice,
-          options: ["Supernova", "nebula", "blackhole"],
-          correctAnswer: "Supernova"),
+        id: generateId(),
+        questionText:
+            "Kepler-22b's exact composition is currently unknown, but it may have a thick atmosphere similar to which planet?",
+        questionType: QuestionType.singleChoice,
+        options: ["Earth", "Neptune", "Mars", "Jupiter"],
+        correctAnswer: "Neptune",
+      ),
+      Question(
+        id: generateId(),
+        questionText:
+            "Kepler-22b completes one orbit around its star in about how many Earth days?",
+        questionType: QuestionType.singleChoice,
+        options: ["365", "290", "180", "100"],
+        correctAnswer: "290",
+      ),
     ];
 
     for (var i = 0; i < qList.length; i++) {
@@ -217,90 +249,105 @@ class _AddRentalHomeScreenState extends ConsumerState<AddExpeditionScreen> {
           adminId: ownerId,
           question: qList[i],
           context: context,
-          quizId: "fa4e54e4-0774-4626-b07a-b229309a99e8");
+          quizId: "e9ba7e4c-956a-414f-8130-a836053f093f");
     }
   }
 
   void addExpedition(WidgetRef ref, BuildContext context) async {
     String? ownerId = ref.read(currentUserProvider)?.uid;
     print(ownerId);
-    // final storageRef = FirebaseStorage.instance.ref("/Kepler/");
-    // final result = await ImageService().uploadImage(storageRef, "Kepler");
-    String? image;
-    // result.fold((left) => null, (right) {
-    //   image = right;
-    // Expedition expedition = Expedition(
-    //     id: generateId(),
-    //     name: "Stars",
-    //     description:
-    //         " Our Milky Way alone contains more than 100 billion, including our most well-studied star, the Sun.",
-    //     image: image.toString());
-    // ref
-    //     .read(expeditionNotifier.notifier)
-    //     .addExpedition(adminId: "", context: context, expedition: expedition);
+
+    Expedition expedition = Expedition(
+        id: generateId(),
+        name: "Kepler 22-b",
+        description:
+            " Kepler-22b (also known by its Kepler Object of Interest designation KOI-087.01) is an exoplanet orbiting within the habitable zone of the Sun-like star Kepler-22.",
+        image:
+            "https://firebasestorage.googleapis.com/v0/b/zenith-08.appspot.com/o/expeditions%2Fkepler22b%2Fk0.jpeg?alt=media&token=c4bbef92-d157-40dd-a60e-cbbf9e3bab85");
+    ref
+        .read(expeditionNotifier.notifier)
+        .addExpedition(adminId: "", context: context, expedition: expedition);
+
+    // });
+  }
+
+  void addEDS(WidgetRef ref, BuildContext context) {
+    String? ownerId = ref.read(currentUserProvider)?.uid;
+    print(ownerId);
 
     List<ExpeditionDetail> eds = [
       ExpeditionDetail(
         id: generateId(),
-        text: "What is a star?",
+        order: 1,
+        text: "Overview",
+        image:
+            "https://firebasestorage.googleapis.com/v0/b/zenith-08.appspot.com/o/expeditions%2Fkepler22b%2Fk0.jpeg?alt=media&token=c4bbef92-d157-40dd-a60e-cbbf9e3bab85",
         description:
-            "Stars are giant balls of hot gas – mostly hydrogen, with some helium and small amounts of other elements. Every star has its own life cycle, ranging from a few million to trillions of years, and its properties change as it ages. Astronomers estimate that the universe could contain up to one septillion stars – that’s a one followed by 24 zeros. Our Milky Way alone contains more than 100 billion, including our most well-studied star, the Sun.",
+            "Kepler-22b is an exoplanet located about 600 light-years away from Earth, in the constellation Cygnus. It was discovered by NASA's Kepler Space Telescope and was the first planet found within the habitable zone of a star similar to our Sun. The planet is roughly 2.4 times the size of Earth, making it a super-Earth, and it orbits its star every 290 days.",
       ),
       ExpeditionDetail(
         id: generateId(),
-        text: "Birth",
+        order: 2,
+        text: "Host Star",
+        image:
+            "https://firebasestorage.googleapis.com/v0/b/zenith-08.appspot.com/o/expeditions%2Fkepler22b%2Fk4.webp?alt=media&token=bd486a98-c714-4b51-b535-9b37a1ff9a14",
         description:
-            "Stars form in large clouds of gas and dust called molecular clouds. Molecular clouds range from 1,000 to 10 million times the mass of the Sun and can span as much as hundreds of light-years. Molecular clouds are cold which causes gas to clump, creating high-density pockets. Some of these clumps can collide with each other or collect more matter, strengthening their gravitational force as their mass grows. Eventually, gravity causes some of these clumps to collapse. When this happens, friction causes the material to heat up, which eventually leads to the development of a protostar – a baby star. ",
+            "Kepler-22b orbits around the star Kepler-22, which is a G-type star, much like our Sun. It has a surface temperature of about 5,518 K and is slightly smaller and cooler than the Sun. The distance between Kepler-22b and its host star places it in the habitable zone, where liquid water could potentially exist under the right atmospheric conditions.",
       ),
       ExpeditionDetail(
         id: generateId(),
-        text: "Life",
+        text: "Habitability",
+        image:
+            "https://firebasestorage.googleapis.com/v0/b/zenith-08.appspot.com/o/expeditions%2Fkepler22b%2Fk0.jpeg?alt=media&token=c4bbef92-d157-40dd-a60e-cbbf9e3bab85",
+        order: 3,
         description:
-            "At first, most of the protostar’s energy comes from heat released by its initial collapse. After millions of years, immense pressures and temperatures in the star’s core squeeze the nuclei of hydrogen atoms together to form helium, a process called nuclear fusion. Nuclear fusion releases energy, which heats the star and prevents it from further collapsing under the force of gravity. Astronomers call stars that are stably undergoing nuclear fusion of hydrogen into helium main sequence stars. This is the longest phase of a star’s life. The star’s luminosity, size, and temperature will slowly change over millions or billions of years during this phase. Our Sun is roughly midway through its main sequence stage.",
+            "Kepler-22b resides in the 'habitable zone,' sometimes called the 'Goldilocks zone,' where conditions are just right for liquid water to exist—neither too hot nor too cold. However, whether Kepler-22b has liquid water or a suitable atmosphere for life remains unknown. Its size suggests it could have a thick atmosphere, potentially making it more like Neptune than Earth.",
       ),
       ExpeditionDetail(
         id: generateId(),
-        text: "Life",
+        text: "Planetary Composition",
+        image:
+            "https://firebasestorage.googleapis.com/v0/b/zenith-08.appspot.com/o/expeditions%2Fkepler22b%2Fk6.jpeg?alt=media&token=bb1d0a62-fddb-466b-bb50-072748519e92",
+        order: 4,
         description:
-            "A star’s gas provides its fuel, and its mass determines how rapidly it runs through its supply, with lower-mass stars burning longer, dimmer, and cooler than very massive stars. More massive stars must burn fuel at a higher rate to generate the energy that keeps them from collapsing under their own weight. Some low-mass stars will shine for trillions of years – longer than the universe has currently existed – while some massive stars will live for only a few million years.",
+            "The exact composition of Kepler-22b is currently unknown. Given its size, it could be a rocky planet with a thick atmosphere, or it might be composed largely of gas or ice. If it has a dense atmosphere, conditions on its surface could differ drastically from Earth-like planets, potentially affecting its habitability.",
       ),
       ExpeditionDetail(
         id: generateId(),
-        text: "Death",
+        text: "Discovery",
+        image:
+            "https://firebasestorage.googleapis.com/v0/b/zenith-08.appspot.com/o/expeditions%2Fkepler22b%2Fk2.jpeg?alt=media&token=9cb794e0-133d-4f9a-bbce-a89a7528d99d",
+        order: 5,
         description:
-            "At the beginning of the end of a star’s life, its core runs out of hydrogen to convert into helium. The energy produced by fusion creates pressure inside the star that balances gravity’s tendency to pull matter together, so the core starts to collapse. But squeezing the core also increases its temperature and pressure, making the star slowly puff up. However, the details of the late stages of the star’s death depend strongly on its mass.",
+            "Kepler-22b was discovered on December 5, 2011, using data from the Kepler Space Telescope. It was the first planet discovered in the habitable zone of a Sun-like star, marking a major milestone in the search for Earth-like planets in other star systems.",
       ),
       ExpeditionDetail(
         id: generateId(),
-        text: "Death",
+        text: "Orbital Period",
+        image:
+            "https://firebasestorage.googleapis.com/v0/b/zenith-08.appspot.com/o/expeditions%2Fkepler22b%2Fk7.jpeg?alt=media&token=32891648-d8ba-4940-b298-8d937e8fcd4e",
+        order: 6,
         description:
-            "A low-mass star’s atmosphere will keep expanding until it becomes a subgiant or giant star while fusion converts helium into carbon in the core. (This will be the fate of our Sun, in several billion years.) Some giants become unstable and pulsate, periodically inflating and ejecting some of their atmospheres. Eventually, all the star’s outer layers blow away, creating an expanding cloud of dust and gas called a planetary nebula.",
+            "Kepler-22b completes one orbit around its star in approximately 290 Earth days, which is slightly shorter than Earth's orbit around the Sun. Its distance from its star is about 15% less than the distance between Earth and the Sun.",
       ),
       ExpeditionDetail(
         id: generateId(),
-        text: "Death",
+        text: "Research Significance",
+        image:
+            "https://firebasestorage.googleapis.com/v0/b/zenith-08.appspot.com/o/expeditions%2Fkepler22b%2Fk1.jpeg?alt=media&token=e1814b32-0cef-401a-9ecf-7650d59d191f",
+        order: 7,
         description:
-            "A high-mass star goes further. Fusion converts carbon into heavier elements like oxygen, neon, and magnesium, which will become future fuel for the core. For the largest stars, this chain continues until silicon fuses into iron. These processes produce energy that keeps the core from collapsing, but each new fuel buys it less and less time. The whole process takes just a few million years. By the time silicon fuses into iron, the star runs out of fuel in a matter of days. The next step would be fusing iron into some heavier element but doing so requires energy instead of releasing it.",
-      ),
-      ExpeditionDetail(
-        id: generateId(),
-        text: "Death",
-        description:
-            "The star’s iron core collapses until forces between the nuclei push the brakes, then it rebounds. This change creates a shock wave that travels outward through the star. The result is a huge explosion called a supernova. The core survives as an incredibly dense remnant, either a neutron star or a black hole.",
+            "Kepler-22b's discovery plays an important role in the ongoing search for habitable planets beyond our solar system. Its location in the habitable zone, coupled with its size, makes it a prime candidate for further study, especially with future telescopes aimed at exploring exoplanetary atmospheres.",
       ),
     ];
 
     for (var i = 0; i < eds.length; i++) {
       ref.read(expeditionDetailNotifier.notifier).addExpeditionDetail(
-            expeditionId: "4ca94538-32d6-4a71-a0c7-5d5c3d1ba4d6",
+            expeditionId: "53e3ffa4-a583-45cc-881e-9ddd5d684f17",
             expeditionDetail: eds[i],
             adminId: ownerId.toString(),
             context: context,
           );
     }
-
-    // });
-
-    clearControllers();
   }
 }

@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:either_dart/either.dart';
 import 'package:flutter/foundation.dart';
+import 'package:zenith/app/constants/firebase_constants.dart';
 import 'package:zenith/core/exceptions/exceptions.dart';
 import 'package:zenith/core/utils/types.dart';
+import 'package:zenith/features/auth/repositories/user_repository.dart';
 import 'package:zenith/features/expedition/model/expedition.dart';
 
 class ExpeditionRepository {
@@ -130,6 +132,35 @@ class ExpeditionRepository {
       throw e.message.toString();
     } catch (e, stackTrace) {
       debugPrint(" error : ${e.toString()} \n stackTrace : $stackTrace");
+      rethrow;
+    }
+  }
+
+  Future<Stream<List<Expedition>>> getAllExpeditionsByIds() async {
+    try {
+      final user =
+          await UserRepository().getUserByEmail2(currentUser?.email ?? "");
+      final expeditionsIds = user.expeditionsIds;
+
+      return expeditionCollection
+          .where('id', whereIn: expeditionsIds)
+          .snapshots()
+          .map((querySnapshot) {
+        // Print each document data for debugging
+        for (var documentSnapshot in querySnapshot.docs) {
+          print(documentSnapshot.data());
+        }
+
+        // Map Firestore documents to Expedition model
+        return querySnapshot.docs
+            .map((documentSnapshot) =>
+                Expedition.fromMap(documentSnapshot.data()))
+            .toList();
+      });
+    } on FirebaseException catch (e) {
+      throw e.message.toString();
+    } catch (e, stackTrace) {
+      debugPrint("error : ${e.toString()} \n stackTrace : $stackTrace");
       rethrow;
     }
   }

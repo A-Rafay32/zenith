@@ -42,6 +42,37 @@ class UserRepository {
     }
   }
 
+  FutureEither0 updateUserExpeditionIds({
+    required String docId,
+    String? field, // For other fields, if needed
+    required String expeditionId, // Expedition ID to add
+  }) async {
+    try {
+      // Get user document
+      DocumentSnapshot userDoc = await userCollection.doc(docId).get();
+
+      // Check if user document exists
+      if (!userDoc.exists) {
+        throw "User Doc doesn't exist";
+      }
+
+      // Create update map for expeditionIds field (only add if not already in the list)
+      Map<String, dynamic> updateData = {
+        'expeditionIds': FieldValue.arrayUnion([expeditionId]),
+        // Other fields to update
+      };
+
+      // Update user document with the updated expeditionIds and any other fields
+      await userDoc.reference.update(updateData);
+
+      return Right(Success(message: "User Updated"));
+    } on FirebaseException catch (e) {
+      return failure(e.message.toString());
+    } catch (e) {
+      return failure(e.toString());
+    }
+  }
+
   Future<UserModel> getUser(String documentId) async {
     try {
       // get user
@@ -69,6 +100,23 @@ class UserRepository {
       }
     } on FirebaseException catch (e) {
       return failure(e.message.toString());
+    }
+  }
+
+  Future<UserModel> getUserByEmail2(String email) async {
+    try {
+      // get user
+      QuerySnapshot userDoc = await userCollection
+          .where("userDetails.email", isEqualTo: email)
+          .get();
+      // if (userDoc.docs.isNotEmpty) {
+      Map<String, dynamic> userData =
+          userDoc.docs.first.data() as Map<String, dynamic>;
+      return (UserModel.fromMap(userData));
+      // }
+    } on FirebaseException catch (e) {
+      print(e.message.toString());
+      rethrow;
     }
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:zenith/app/constants/app_images.dart';
 import 'package:zenith/app/themes/app_colors.dart';
 import 'package:zenith/app/themes/app_paddings.dart';
@@ -8,13 +9,16 @@ import 'package:zenith/app/themes/app_text_field_themes.dart';
 import 'package:zenith/core/extensions/routes_extenstion.dart';
 import 'package:zenith/core/extensions/sizes_extensions.dart';
 import 'package:zenith/core/utils/loader.dart';
-import 'package:zenith/features/expedition/providers/provider.dart';
+import 'package:zenith/features/expedition/providers/expedition_provider.dart';
 import 'package:zenith/features/expedition/screen/expedition_detail_screen.dart';
+import 'package:zenith/features/home/providers/articles_provider.dart';
 import 'package:zenith/features/home/providers/home_state_provider.dart';
 import 'package:zenith/features/expedition/screen/add_expedition_screen.dart';
+import 'package:zenith/features/home/screens/ai_screen.dart';
 import 'package:zenith/features/home/screens/buyer_profile_screen.dart';
 import 'package:zenith/features/home/screens/explore_article_screen.dart';
 import 'package:zenith/features/home/screens/explore_exoplanets_screen.dart';
+import 'package:zenith/features/home/screens/news_card_widget.dart';
 import 'package:zenith/features/stars/stars_screen.dart';
 import 'package:zenith/features/home/screens/widgets/app_bars.dart';
 import 'package:zenith/features/home/screens/widgets/custom_navigation_bar.dart';
@@ -30,7 +34,7 @@ class HomeScreen extends ConsumerWidget {
   final List<Widget> screens = [
     const HomeScreenWidget(),
     const ExploreArticlesScreen(),
-    const ExploreExoplanetsScreen(),
+    // const ExploreExoplanetsScreen(),
     ConstellationsListDemo(),
     const BuyerProfileScreen(),
   ];
@@ -51,14 +55,33 @@ class HomeScreen extends ConsumerWidget {
         w: context.w,
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.primaryColor,
+        backgroundColor: AppColors.secondaryColor,
         onPressed: () {
-          context.push(const AddExpeditionScreen());
+          // context.push(const AddExpeditionScreen());
+          // context.push(const AIScreen());
         },
-        child: const Icon(
-          Icons.add,
-          color: AppColors.backgroundColor,
+        child: SvgPicture.asset(
+          "assets/svgs/ai.svg",
+          height: 30,
+          width: 30,
+          colorFilter:
+              const ColorFilter.mode(AppColors.textBlackColor, BlendMode.srcIn),
         ),
+        // child: Row(
+        //   children: [
+        //     Text("Ask AI",
+        //         style: Theme.of(context)
+        //             .textTheme
+        //             .labelMedium
+        //             ?.copyWith(color: AppColors.textBlackColor)),
+        //     AppSizes.tinyX,
+        //     SvgPicture.asset(
+        //       "assets/svgs/ai.svg",
+        //       colorFilter: const ColorFilter.mode(
+        //           AppColors.textBlackColor, BlendMode.srcIn),
+        //     )
+        //   ],
+        // ),
       ),
     );
   }
@@ -77,6 +100,7 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
   Widget build(BuildContext context) {
     final streamValue = ref.watch(expeditionStreamProvider);
     final streamValueQuiz = ref.watch(quizStreamProvider);
+    final articleValue = ref.watch(articlesProvider);
 
     return SizedBox(
       height: context.h,
@@ -124,18 +148,11 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
                       //         topLeft: Radius.circular(45),
                       //         topRight: Radius.circular(45))),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           AppSizes.normalY,
-                          Row(
-                            children: [
-                              Text("Recently visited",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineSmall),
-                              const Spacer(),
-                              // const Text("View All"),
-                            ],
-                          ),
+                          Text("Go to Expeditions ",
+                              style: Theme.of(context).textTheme.headlineSmall),
                           AppSizes.normalY,
                           SizedBox(
                             height: context.h * 0.35,
@@ -156,6 +173,35 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
                                       description: data[index].description,
                                       onTapFav: () {}),
                             ),
+                          ),
+
+                          AppSizes.normalY,
+
+                          Text("Recent News ",
+                              style: Theme.of(context).textTheme.headlineSmall),
+                          AppSizes.normalY,
+                          articleValue.when(
+                            data: (data) => SizedBox(
+                              height: context.h * 0.2,
+                              child: GridView.builder(
+                                scrollDirection: Axis.horizontal,
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 1,
+                                        childAspectRatio: 1.0,
+                                        mainAxisSpacing: 10.h,
+                                        crossAxisSpacing: 5.w),
+                                itemCount: data.results.length,
+                                itemBuilder: (context, index) => NewsCardWidget(
+                                    id: data.results[index].id.toString(),
+                                    image: data.results[index].imageUrl,
+                                    name: data.results[index].title,
+                                    description: data.results[index].summary,
+                                    onTapFav: () {}),
+                              ),
+                            ),
+                            error: (error, stackTrace) => Container(),
+                            loading: () => Container(),
                           ),
 
                           // SizedBox(

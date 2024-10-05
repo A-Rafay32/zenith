@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zenith/app/constants/app_images.dart';
 import 'package:zenith/app/themes/app_colors.dart';
 import 'package:zenith/app/themes/app_paddings.dart';
@@ -11,13 +10,11 @@ import 'package:zenith/core/extensions/sizes_extensions.dart';
 import 'package:zenith/core/utils/gen_random_ids.dart';
 import 'package:zenith/core/utils/loader.dart';
 import 'package:zenith/features/auth/providers/auth_providers.dart';
-import 'package:zenith/features/auth/screens/widgets/app_bar_white.dart';
 import 'package:zenith/features/auth/screens/widgets/button.dart';
 import 'package:zenith/features/expedition/model/expedtion_detail.dart';
-import 'package:zenith/features/expedition/providers/provider.dart';
+import 'package:zenith/features/expedition/providers/expedition_provider.dart';
 import 'package:zenith/features/quiz/model/quiz_session.dart';
 import 'package:zenith/features/quiz/providers/quiz_notifier.dart';
-import 'package:zenith/features/quiz/providers/quiz_providers.dart';
 import 'package:zenith/features/quiz/providers/quiz_session_notifier.dart';
 import 'package:zenith/features/quiz/screen/quiz_detail_screen.dart';
 
@@ -181,6 +178,10 @@ class Page1 extends ConsumerWidget {
                             currentScore: 0,
                             attemptCount: 1,
                             startTime: DateTime.now());
+
+                        // ref
+                        //     .read(userQuizNotifier.notifier)
+                        //     .updateUserQuizById(quizSession, context);
 
                         ref
                             .read(quizSessionNotifierProvider.notifier)

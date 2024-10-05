@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zenith/core/extensions/snackbar_ext.dart';
 import 'package:zenith/core/utils/types.dart';
 import 'package:zenith/features/expedition/model/expedtion_detail.dart';
-import 'package:zenith/features/expedition/providers/provider.dart';
+import 'package:zenith/features/expedition/providers/expedition_provider.dart';
 import 'package:zenith/features/expedition/repository/expedition_detail_repository.dart';
 
 class ExpeditionDetailNotifier extends StateNotifier<AsyncValue> {

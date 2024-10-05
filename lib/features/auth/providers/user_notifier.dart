@@ -11,12 +11,33 @@ class UserNotifier extends StateNotifier<AsyncValue> {
 
   final UserRepository userService;
 
-  FutureEither0 updateUser(
+  void updateUser(
       {String? field, required Map<String, dynamic> updatedFields}) async {
     state = const AsyncValue.loading();
-    return await userService
+    final result = await userService
         .updateUser(docId: currentUser?.uid ?? "", updatedFields: updatedFields)
         .whenComplete(() => const AsyncValue.data(null));
+
+    result.fold((left) {
+      print(left.message.toString());
+    }, (right) {
+      print(right.message.toString());
+    });
+  }
+
+  void updateUserExpeditionIds(
+      {String? field, required String expeditionId}) async {
+    state = const AsyncValue.loading();
+    final result = await userService
+        .updateUserExpeditionIds(
+            docId: currentUser?.uid ?? "", expeditionId: expeditionId)
+        .whenComplete(() => const AsyncValue.data(null));
+
+    result.fold((left) {
+      print(left.message.toString());
+    }, (right) {
+      print(right.message.toString());
+    });
   }
 
   // FutureEither0 addToFavourites(String houseId) async {

@@ -5,7 +5,7 @@ import 'package:zenith/core/extensions/snackbar_ext.dart';
 import 'package:zenith/core/utils/types.dart';
 import 'package:zenith/features/auth/providers/auth_providers.dart';
 import 'package:zenith/features/expedition/model/expedition.dart';
-import 'package:zenith/features/expedition/providers/provider.dart';
+import 'package:zenith/features/expedition/providers/expedition_provider.dart';
 import 'package:zenith/features/expedition/repository/expediton_repository.dart';
 import 'package:zenith/features/quiz/model/quiz.dart';
 import 'package:zenith/features/quiz/providers/quiz_providers.dart';

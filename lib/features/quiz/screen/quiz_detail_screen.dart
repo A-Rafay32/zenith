@@ -13,7 +13,7 @@ import 'package:zenith/core/utils/loader.dart';
 import 'package:zenith/features/auth/screens/widgets/app_bar_white.dart';
 import 'package:zenith/features/auth/screens/widgets/button.dart';
 import 'package:zenith/features/expedition/model/expedtion_detail.dart';
-import 'package:zenith/features/expedition/providers/provider.dart';
+import 'package:zenith/features/expedition/providers/expedition_provider.dart';
 import 'package:zenith/features/quiz/model/question.dart';
 import 'package:zenith/features/quiz/model/quiz.dart';
 import 'package:zenith/features/quiz/model/quiz_session.dart';
@@ -54,6 +54,7 @@ class QuizDetailScreen extends ConsumerWidget {
             List<Widget> pages = List.generate(
                 data.length,
                 (index) => QuizPage(
+                      totalIndexes: data.length,
                       quiz: quiz,
                       isLastPage: index != data.length - 1 ? false : true,
                       quizSessionId: quizSessionId,
@@ -80,6 +81,7 @@ class QuizPage extends ConsumerStatefulWidget {
     required this.index,
     required this.quizSessionId,
     required this.isLastPage,
+    required this.totalIndexes,
   });
 
   final Question question;
@@ -87,6 +89,7 @@ class QuizPage extends ConsumerStatefulWidget {
   final int index;
   final String quizSessionId;
   final bool isLastPage;
+  final int totalIndexes;
 
   @override
   ConsumerState<QuizPage> createState() => _QuizPageState();
@@ -220,10 +223,6 @@ class _QuizPageState extends ConsumerState<QuizPage> {
                                     : false,
                                 completionTime: DateTime.now(),
                                 attemptCount: value.attemptCount);
-                            ref
-                                .read(quizSessionNotifierProvider.notifier)
-                                .deleteQuizSession(
-                                    widget.quizSessionId, context);
 
                             ref.read(userQuizNotifier.notifier).addUserQuiz(
                                 userQuiz: userQuiz,
@@ -233,12 +232,17 @@ class _QuizPageState extends ConsumerState<QuizPage> {
                             showDialog(
                                 context: context,
                                 builder: (context) => QuizResultScreen(
-                                    isPassed: true,
-                                    score: 7,
-                                    totalQuestions: 10,
-                                    attemptCount: 1,
-                                    startTime: DateTime.now(),
-                                    endTime: DateTime.now()));
+                                      isPassed: userQuiz.isPassed,
+                                      score: userQuiz.finalScore,
+                                      totalQuestions: widget.totalIndexes,
+                                      attemptCount: 1,
+                                      // startTime: quizSe,
+                                      // endTime: DateTime.now()
+                                    ));
+                            ref
+                                .read(quizSessionNotifierProvider.notifier)
+                                .deleteQuizSession(
+                                    widget.quizSessionId, context);
                           });
                         },
                         text: "Submit"),

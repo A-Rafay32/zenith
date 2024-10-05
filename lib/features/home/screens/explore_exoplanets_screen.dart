@@ -72,11 +72,18 @@ class ExploreExoplanetsScreen extends ConsumerWidget {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(15),
                             child: CachedNetworkImage(
-                              imageUrl: data.items[index].links[0].href,
-                              fit: BoxFit.cover,
-                              height: 90.h,
-                              width: 90.w,
-                            )),
+                                imageUrl: data.items[index].links[0].href ?? "",
+                                fit: BoxFit.cover,
+                                height: 90.h,
+                                width: 90.w,
+                                errorWidget: (context, url, error) => ClipRRect(
+                                      borderRadius: BorderRadius.circular(15),
+                                      child: Image.asset(
+                                        AppImages.defaultImage,
+                                        width: 300.w,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ))),
                         AppSizes.tinyX,
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -85,7 +92,7 @@ class ExploreExoplanetsScreen extends ConsumerWidget {
                             SizedBox(
                               width: context.w * 0.6,
                               child: Text(
-                                data.items[index].data[0].title,
+                                data.items[index].data[0].title ?? "",
                                 overflow: TextOverflow.ellipsis,
                                 style: context.textTheme.bodyMedium
                                     ?.copyWith(fontWeight: FontWeight.w700),
@@ -95,7 +102,7 @@ class ExploreExoplanetsScreen extends ConsumerWidget {
                             SizedBox(
                               width: context.w * 0.6,
                               child: Text(
-                                data.items[index].data[0].description,
+                                data.items[index].data[0].description ?? "",
                                 maxLines: 4,
                                 overflow: TextOverflow.ellipsis,
                                 style: context.textTheme.bodySmall?.copyWith(

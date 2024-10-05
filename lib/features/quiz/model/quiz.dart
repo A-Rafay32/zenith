@@ -3,12 +3,14 @@ import 'dart:convert';
 class Quiz {
   final String id;
   final String expeditionId;
+  final String quizName;
   final List<String> correctAnswers;
   final int passingCriteria;
 
   Quiz({
     required this.id,
     required this.expeditionId,
+    required this.quizName,
     required this.correctAnswers,
     required this.passingCriteria,
   });
@@ -17,6 +19,7 @@ class Quiz {
     return {
       'id': id,
       'expeditionId': expeditionId,
+      'quizName': quizName,
       'correctAnswers': correctAnswers,
       'passingCriteria': passingCriteria,
     };
@@ -26,6 +29,7 @@ class Quiz {
     return Quiz(
       id: map['id'] ?? '',
       expeditionId: map['expeditionId'] ?? '',
+      quizName: map['quizName'] ?? '',
       correctAnswers: List<String>.from(map['correctAnswers']),
       passingCriteria: map['passingCriteria']?.toInt() ?? 0,
     );

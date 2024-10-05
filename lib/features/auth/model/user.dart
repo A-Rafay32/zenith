@@ -48,12 +48,12 @@ class UserModel {
       userDetails: UserDetails.fromMap(map['userDetails']),
       expeditionId: map['expeditionId'] ?? '',
       lastQuizPlayedId: map['lastQuizPlayedId'],
-      expeditionsIds: List<String>.from(map['expeditionsIds']),
-      favExpeditions: List<String>.from(map['favExpeditions']),
-      quizesPlayed: List<String>.from(map['quizesPlayed']),
-      quizesInProgress: List<String>.from(map['quizesInProgress']),
-      expeditionsInProgress: List<String>.from(map['expeditionsInProgress']),
-      badgesEarned: List<String>.from(map['badgesEarned']),
+      expeditionsIds: (map['expeditionsIds']),
+      favExpeditions: (map['favExpeditions']),
+      quizesPlayed: (map['quizesPlayed']),
+      quizesInProgress: (map['quizesInProgress']),
+      expeditionsInProgress: (map['expeditionsInProgress']),
+      badgesEarned: (map['badgesEarned']),
     );
   }
 

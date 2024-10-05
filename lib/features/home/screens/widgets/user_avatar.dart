@@ -26,7 +26,7 @@ class UserAvatar extends StatelessWidget {
           userName,
           style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                 fontSize: 27.sp,
-                color: AppColors.textBlackColor,
+                color: AppColors.textWhiteColor,
                 fontWeight: FontWeight.w700,
               ),
         ),

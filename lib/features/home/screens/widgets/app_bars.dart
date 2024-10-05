@@ -10,11 +10,11 @@ final List<Widget> appBars = [
     onPressed: () {},
     text: "Explore Articles",
   ),
-  CustomAppBar(
-    enableBackButton: false,
-    onPressed: () {},
-    text: "Explore ExoPlanets",
-  ),
+  // CustomAppBar(
+  //   enableBackButton: false,
+  //   onPressed: () {},
+  //   text: "Explore ExoPlanets",
+  // ),
   CustomAppBar(
     enableBackButton: false,
     onPressed: () {},

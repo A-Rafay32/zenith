@@ -81,31 +81,31 @@ class LoginScreen extends ConsumerWidget {
                   ),
                   AppSizes.largeY,
                   AppSizes.largeY,
-                  GestureDetector(
-                    onTap: () => ref
-                        .read(socialAuthNotifier.notifier)
-                        .googleSignIn(
-                            email: emailController.text.trim(),
-                            password: passwordController.text.trim(),
-                            context: context),
-                    child: Container(
-                      height: 60.h,
-                      width: context.w * 0.7,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(color: Colors.white54)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset("assets/svgs/google.svg",
-                              height: 30.h, width: 30.w),
-                          SizedBox(width: 20.w),
-                          Text("Sign in with Google",
-                              style: context.textTheme.labelLarge)
-                        ],
-                      ),
-                    ),
-                  ),
+                  // GestureDetector(
+                  //   onTap: () => ref
+                  //       .read(socialAuthNotifier.notifier)
+                  //       .googleSignIn(
+                  //           email: emailController.text.trim(),
+                  //           password: passwordController.text.trim(),
+                  //           context: context),
+                  //   child: Container(
+                  //     height: 60.h,
+                  //     width: context.w * 0.7,
+                  //     decoration: BoxDecoration(
+                  //         borderRadius: BorderRadius.circular(15),
+                  //         border: Border.all(color: Colors.white54)),
+                  //     child: Row(
+                  //       mainAxisAlignment: MainAxisAlignment.center,
+                  //       children: [
+                  //         SvgPicture.asset("assets/svgs/google.svg",
+                  //             height: 30.h, width: 30.w),
+                  //         SizedBox(width: 20.w),
+                  //         Text("Sign in with Google",
+                  //             style: context.textTheme.labelLarge)
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                   // const SocialCard(),
                   const Spacer(),
                   SignUpBar(

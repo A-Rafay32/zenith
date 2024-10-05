@@ -20,4 +20,6 @@ class AppSvgs {
   static const inbox = "assets/svgs/inbox.svg";
   static const profile = "assets/svgs/profile.svg";
   static const favourites = "assets/svgs/heart_filled.svg";
+  static const planets = "assets/svgs/planets.svg";
+  static const constellations = "assets/svgs/constellations.svg";
 }
