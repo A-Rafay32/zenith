@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:zenith/app/constants/app_images.dart';
 import 'package:zenith/app/themes/app_colors.dart';
 import 'package:zenith/app/themes/app_paddings.dart';
 import 'package:zenith/app/themes/app_text_field_themes.dart';
@@ -77,10 +78,9 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
     final streamValue = ref.watch(expeditionStreamProvider);
     final streamValueQuiz = ref.watch(quizStreamProvider);
 
-    return Container(
+    return SizedBox(
       height: context.h,
       width: context.w,
-      padding: AppPaddings.normal,
       child: streamValue.when(
         error: (error, stackTrace) {
           print("error : ${error.toString()} stackTrace: $stackTrace");
@@ -89,88 +89,106 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
         },
         loading: () => const Loader(),
         data: (data) => SingleChildScrollView(
-          child: Column(
+          child: Stack(
             children: [
-              Column(children: [
-                Container(
-                    height: 50,
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: TextField(
-                      cursorHeight: 25,
-                      controller: TextEditingController(),
-                      decoration: AppTextFieldDecorations.searchFieldDecoration,
-                    )),
-                AppSizes.normalY,
-                // CatogoriesTabNav(w: context.w),
-              ]),
-              Container(
-                // height: context.h * 0.72,
-                // width: context.w,
-                // padding: AppPaddings.normal,
-                // decoration: const BoxDecoration(
-                //     color: Colors.white,
-                //     borderRadius: BorderRadius.only(
-                //         topLeft: Radius.circular(45),
-                //         topRight: Radius.circular(45))),
+              Image.asset(
+                AppImages.authImage,
+                fit: BoxFit.cover,
+                height: context.h,
+                width: context.w,
+              ),
+              Padding(
+                padding: AppPaddings.normal,
                 child: Column(
                   children: [
-                    AppSizes.normalY,
-                    Row(
-                      children: [
-                        Text("Recently visited",
-                            style: Theme.of(context).textTheme.headlineSmall),
-                        const Spacer(),
-                        // const Text("View All"),
-                      ],
-                    ),
-                    AppSizes.normalY,
-                    SizedBox(
-                      height: context.h * 0.35,
-                      child: GridView.builder(
-                        scrollDirection: Axis.horizontal,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 1,
-                            childAspectRatio: 1.0,
-                            mainAxisSpacing: 10.h,
-                            crossAxisSpacing: 5.w),
-                        itemCount: data.length,
-                        itemBuilder: (context, index) => ExpeditionCardWidget(
-                            id: data[index].id,
-                            image: data[index].image,
-                            name: data[index].name,
-                            description: data[index].description,
-                            onTapFav: () {}),
+                    Column(children: [
+                      Container(
+                          height: 50,
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: TextField(
+                            cursorHeight: 25,
+                            controller: TextEditingController(),
+                            decoration:
+                                AppTextFieldDecorations.searchFieldDecoration,
+                          )),
+                      AppSizes.normalY,
+                      // CatogoriesTabNav(w: context.w),
+                    ]),
+                    Container(
+                      // height: context.h * 0.72,
+                      // width: context.w,
+                      // padding: AppPaddings.normal,
+                      // decoration: const BoxDecoration(
+                      //     color: Colors.white,
+                      //     borderRadius: BorderRadius.only(
+                      //         topLeft: Radius.circular(45),
+                      //         topRight: Radius.circular(45))),
+                      child: Column(
+                        children: [
+                          AppSizes.normalY,
+                          Row(
+                            children: [
+                              Text("Recently visited",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineSmall),
+                              const Spacer(),
+                              // const Text("View All"),
+                            ],
+                          ),
+                          AppSizes.normalY,
+                          SizedBox(
+                            height: context.h * 0.35,
+                            child: GridView.builder(
+                              scrollDirection: Axis.horizontal,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 1,
+                                      childAspectRatio: 1.0,
+                                      mainAxisSpacing: 10.h,
+                                      crossAxisSpacing: 5.w),
+                              itemCount: data.length,
+                              itemBuilder: (context, index) =>
+                                  ExpeditionCardWidget(
+                                      id: data[index].id,
+                                      image: data[index].image,
+                                      name: data[index].name,
+                                      description: data[index].description,
+                                      onTapFav: () {}),
+                            ),
+                          ),
+
+                          // SizedBox(
+                          //   height: context.h * 0.25,
+                          //   child: ListView.builder(
+                          //     scrollDirection: Axis.horizontal,
+                          //     itemCount: 5,
+                          //     // data.length,
+                          //     itemBuilder: (context, index) => ExpeditionCardWidget(
+                          //         image: "",
+                          //         name: "Centarus",
+                          //         description: "1800 lightyears ",
+                          //         onTapFav: () {}),
+
+                          //     // FeaturedHouseImages(
+                          //     //   onTap: () {
+                          //     //     // context.push(
+                          //     //     //     HouseDetailScreen(house: data[index]));
+                          //     //   },
+                          //     //   house: "data[index]",
+                          //     // )
+                          //   ),
+                          // ),
+                          AppSizes.normalY,
+                          AppSizes.normalY,
+                          AppSizes.normalY,
+                          AppSizes.normalY,
+                        ],
                       ),
-                    ),
-
-                    // SizedBox(
-                    //   height: context.h * 0.25,
-                    //   child: ListView.builder(
-                    //     scrollDirection: Axis.horizontal,
-                    //     itemCount: 5,
-                    //     // data.length,
-                    //     itemBuilder: (context, index) => ExpeditionCardWidget(
-                    //         image: "",
-                    //         name: "Centarus",
-                    //         description: "1800 lightyears ",
-                    //         onTapFav: () {}),
-
-                    //     // FeaturedHouseImages(
-                    //     //   onTap: () {
-                    //     //     // context.push(
-                    //     //     //     HouseDetailScreen(house: data[index]));
-                    //     //   },
-                    //     //   house: "data[index]",
-                    //     // )
-                    //   ),
-                    // ),
-                    AppSizes.normalY,
-                    AppSizes.normalY,
-                    AppSizes.normalY,
-                    AppSizes.normalY,
+                    )
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),

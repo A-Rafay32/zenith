@@ -4,6 +4,7 @@ import 'package:zenith/features/home/screens/widgets/home_screen_app_bar.dart';
 
 final List<Widget> appBars = [
   const HomeScreenAppBar(),
+
   CustomAppBar(
     enableBackButton: false,
     onPressed: () {},

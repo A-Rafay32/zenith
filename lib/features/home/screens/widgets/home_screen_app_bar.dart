@@ -17,7 +17,7 @@ class HomeScreenAppBar extends ConsumerWidget {
     // String? userName = FirebaseAuth.instance.currentUser?.displayName;
 
     return AppBar(
-      backgroundColor: AppColors.backgroundColor,
+      // backgroundColor: AppColors.backgroundColor,
       centerTitle: false,
       leading: const Padding(
         padding: EdgeInsets.only(left: 5, top: 5, bottom: 8),
